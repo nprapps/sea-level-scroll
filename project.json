@@ -1,0 +1,31 @@
+{
+  "s3": {
+    "stage": {
+      "bucket": "stage-apps.npr.org",
+      "path": "sea-level-scroll"
+    },
+    "live": {
+      "bucket": "apps.npr.org",
+      "path": "sea-level-scroll"
+    }
+  },
+  "styles": {
+    "src/css/seed.less": "build/style.css"
+  },
+  "scripts": {
+    "src/js/main.js": "build/app.js"
+  },
+  "title": "",
+  "description": "",
+  "url": "",
+  "image": "assets/logo.png",
+  "analytics": {
+    "topicIDs": [],
+    "primaryTopic": "",
+    "secondaryTopics": []
+  },
+  "sheets": [],
+  "docs": {"story" : "17pmxu-k4oyd9vOnMbjkeyFd4ZQn5l45TooSCPKioajE"},
+  "embedded": true,
+  "production": false
+}

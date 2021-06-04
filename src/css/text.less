@@ -1,0 +1,43 @@
+.slide.text {
+  background: #111;
+  color: #eee;
+  padding: 20vh 0 60vh;
+
+  .text {
+  	// font-family: @serif;
+    background: inherit;
+    color: inherit;
+    margin: 0 auto;
+    max-width: 630px;
+    width: 100%;
+    padding: 20px;
+    float: none;
+    box-shadow: none;
+    line-height: 1.7;
+    font-size: 17px;
+
+    // .divider {
+    //   width: 50%;
+    //   border-top: 2px solid @gray-medium;
+    // }
+
+    @media @mobile {
+      font-size: 15px;
+    }
+
+
+    .section-opener&::before {
+      display: block;
+      border-top: 1px solid white;
+      content: "";
+      margin: 32px auto;
+      width: 50%;
+      max-width: 200px;
+    }
+  }
+
+  & + .slide .text {
+    margin-top: 30vh;
+  }
+
+}

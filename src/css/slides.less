@@ -1,0 +1,190 @@
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// weird flex but okay
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.slide {
+  clear: right;
+  position: relative;
+  overflow: hidden;
+
+  a, a:visited {
+    color: @gray-intermediate;
+    text-decoration: none;
+  }
+
+  a:hover, a:active, a:focus {
+    color: @gray-medium;
+  }
+
+  &.section-opener {
+    // .content::first-letter {
+    //   font-size: 200%;
+    //   // font-family: @serif;
+    //   line-height: 1;
+    //   vertical-align: baseline;
+    //   // float: left;
+    //   margin-right: 4px;
+    // }
+
+    b {
+      text-transform: uppercase;
+      font-size: 1.6rem;
+      padding-right: 2px;
+      color: #fff;
+      font-weight: normal;
+
+      .knockout-upper();
+    }
+  }
+
+  .backdrop {
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    animation: none;
+  }
+
+  .inset {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    max-width: 50%;
+    display: none;
+    z-index: -1;
+    border: 3px solid white;
+  }
+
+  .boot-complete & .backdrop {
+    position: fixed;
+    opacity: 0;
+    display: none;
+  }
+
+  &.exiting {
+    .backdrop {
+      display: block;
+      animation: fade-out .2s linear;
+      opacity: 0;
+    }
+  }
+
+  &.active {
+    .backdrop {
+      display: block;
+      animation: fade-in .2s linear;
+      opacity: 1;
+    }
+
+    .inset {
+      display: block;
+    }
+  }
+
+  .text {
+    clear: both;
+    font-size: 17px;
+    padding: 24px;
+    background: fade(#222, 90%);
+    color: #eee;
+    .gotham();
+    box-shadow: 0 24px 8px -8px fade(black, 20%);
+    margin-bottom: 60px;
+    margin: 5vh 40px 90vh;
+    width: 35%;
+    float: right;
+
+    .align-left& {
+      float: left;
+    }
+
+    .align-center& {
+      float: none;
+      margin: 5vh auto 90vh;
+    }
+
+    .city-locator {
+      border: 1px solid white;
+
+      & + p {
+        margin-top: 0;
+        font-size: 80%;
+      }
+    }
+
+    @media @mobile {
+      width: auto;
+      font-size: 15px;
+      padding: 20px;
+      margin: 5vh 20px 90vh;
+    }
+  }
+
+  .caption {
+    font-size: 80%;
+    padding-top: 20px;
+    font-style: italic;
+
+    @media @mobile {
+      padding-top: 10px;
+    }
+  }
+
+  &.image {
+    .backdrop {
+      object-fit: cover;
+    }
+  }
+
+
+  p.sat-attribution {
+    position: absolute;
+    right: 2%;
+    bottom: 0%;
+    color: white;
+    .gotham();
+    font-size: 10px;
+    background-color: rgba(0,0,0,0.7);
+  }
+
+  .fade {
+    height: 40vh;
+    background-image: linear-gradient(to bottom, transparent, #111);
+
+    #title-the-gobi-desert& {
+      height: 90vh;
+    }
+  }
+
+
+  &.chart h1 {
+    .gotham();
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 10px;
+  }
+
+  &.chart h2 {
+    font-family: Gotham, sans-serif;
+    font-size: 13px;
+    color: white;
+    font-weight: normal;
+  }
+
+}
+
+// slide types
+@import "text";

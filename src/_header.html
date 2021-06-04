@@ -1,0 +1,23 @@
+<header class="splash image slide">
+  <img
+    src="./assets/synced/<%= doc.intro.image %>"
+    class="backdrop"
+    alt=""
+  >
+  <div class="darken">
+    <div class="chatter">
+      <img class="logo" src="./assets/logo-outline.svg" alt="NPR">
+      <h1><%= doc.intro.headline %></h1>
+      <%= t.renderMarkdown(doc.intro.chatter) %>
+    </div>
+
+    <div class="scroll-bug" aria-hidden="true">
+      scroll
+      <svg viewBox="0 0 50 50" width="50" height="25">
+        <path
+          d="M 0,0 L 25,25 50,0"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</header>
