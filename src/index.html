@@ -3,12 +3,14 @@
 var doc = grunt.data.archieml.story;
 var renderMarkdownText = text => t.renderMarkdown(text).replace(/<\/?p>/g, "");
 var project = Object.assign({}, grunt.data.json.project, doc.social);
-console.log(doc)
 %>
 <html lang="en-US">
   <head>
     <%= t.include("partials/_head.html", { project }) %>
     <link rel="stylesheet" type="text/css" href="style.css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
   </head>
   <body>
 
@@ -40,7 +42,13 @@ console.log(doc)
           </div>
         </div>
       </header>
-
+      <div
+    id="base-map"
+    class="backdrop hidden"
+    alt=""
+    style="z-index:-1"
+      >
+    </div>
       <%
         doc.sequence.forEach(function(slide) {
           if (slide.type == "skip") return;
@@ -126,8 +134,12 @@ console.log(doc)
         </div>
       </div>
     </footer>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
     <script src="app.js" async></script>
     <%= t.include("partials/_analytics.html") %>
+
   </body>
 </html>
 

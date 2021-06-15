@@ -3,3 +3,33 @@
 @import "slides";
 @import "header";
 @import "footer";
+
+.scroll-bug {
+  .knockout-header();
+  text-align: center;
+  color: #ccc;
+  font-size: .85rem;
+  padding: 2rem 0;
+  text-shadow: 0 2px fade(black, 20%);
+
+  // @media @mobile-above {
+  //   display: block;
+  // }
+
+  @keyframes drop {
+    from { transform: translateY(0); }
+    to { transform: translateY(50%); }
+  }
+
+  svg {
+    display: block;
+    margin: 10px auto;
+    animation: drop 2s ease-in-out infinite;
+
+    path {
+      stroke: #ccc;
+      stroke-width: 6;
+      fill: none;
+    }
+  }
+}

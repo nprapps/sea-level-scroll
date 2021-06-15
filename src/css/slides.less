@@ -141,7 +141,7 @@
     }
   }
 
-  &.image {
+  &.image, &.map {
     .backdrop {
       object-fit: cover;
     }
@@ -185,6 +185,24 @@
   }
 
 }
+
+#base-map {z-index: -1;
+    position: relative;
+    clear: right;
+    position: fixed;
+    overflow: hidden;
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    animation: none;
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
 
 // slide types
 @import "text";

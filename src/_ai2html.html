@@ -1,0 +1,17 @@
+<section class="ai2html slide" id="<%= slide.id %>">
+
+  <div class="backdrop">
+  <%= t.include(`./ai2html/_${slide.include}.html`, { slide }) %>
+  </div>
+  <div class="text">
+    <div class="content">
+      <%= t.renderMarkdown(slide.text) %>
+    </div>
+    <% if (slide.caption) { %>
+    <div class="caption">
+      <%= slide.caption %>
+    </div>
+    <% } %>
+  </div>
+
+</section>

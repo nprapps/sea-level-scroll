@@ -1,13 +1,4 @@
-<section class="image slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>" data-type="image">
-  <img
-    src="./assets/synced/<%= slide.image %>"
-    class="backdrop"
-    alt=""
-    style="<%= t.style({
-      "object-fit": slide.contain ? "contain" : false,
-      "object-position": slide.anchor
-    }) %>"
-  >
+<section class="map slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>" data-type="map">
   <% if (slide.inset) { %>
   <img class="inset" src="./assets/synced/<%= slide.inset%>" alt="">
   <% } %>

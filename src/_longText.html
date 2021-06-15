@@ -1,5 +1,6 @@
-<section class="image slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>" data-type="image">
+<section class="image slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>" data-type="longText" data-num="<%= slide.numImages%>">
   <img
+    id="slide-backdrop"
     src="./assets/synced/<%= slide.image %>"
     class="backdrop"
     alt=""
