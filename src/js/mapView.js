@@ -4,6 +4,7 @@ var mapKey = require("../../data/map_keys.sheet.json");
 var mapElement = $.one("#base-map");
 
 var active;
+
 var enter = function (slide, map) {
   if (slide == active) return;
   mapElement.classList.remove("hidden");
@@ -21,10 +22,14 @@ var enter = function (slide, map) {
     northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
     bounds = L.latLngBounds(southWest, northEast);
 
+  // console.log(currLayer.duration)
   if (currLayer.duration > 0) {
     map.flyToBounds(bounds, currLayer.zoomLevel, {
-      animate: currLayer.duration > 0,
+      animate: false,
       duration: currLayer.duration,
+      maxZoom: currLayer.zoomLevel,
+      noMoveStart: false,
+      easeLinearity: 1,
     });
   } else {
     map.fitBounds(bounds, currLayer.zoomLevel);
@@ -44,10 +49,12 @@ var exit = function () {
   active = null;
 };
 
+var preload = async function (slide, map) {};
+
 var fetchAsset = async function (asset) {
   var response = await fetch(`../assets/synced/${asset}`);
   var json = await response.json();
   return json;
 };
 
-module.exports = { enter, exit };
+module.exports = { enter, exit, preload };

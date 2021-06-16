@@ -8,20 +8,15 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
   <head>
     <%= t.include("partials/_head.html", { project }) %>
     <link rel="stylesheet" type="text/css" href="style.css">
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   </head>
   <body>
 
     <main class="sequence">
 
       <header class="splash image slide">
-        <img
-          src="./assets/synced/<%= doc.intro.image %>"
-          class="backdrop"
-          alt=""
-        >
+        <video autoplay muted loop id="myVideo" class="backdrop" src="./assets/synced/water_road.mov">
+        </video>
         <div class="darken">
           <div class="chatter">
             <img class="logo" src="./assets/logo-outline.svg" alt="NPR">
@@ -134,9 +129,7 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
         </div>
       </div>
     </footer>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="app.js" async></script>
     <%= t.include("partials/_analytics.html") %>
 

@@ -1,0 +1,28 @@
+<section class="video slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>">
+  <video
+    data-src="./assets/synced/<%= slide.video %>"
+    class="backdrop"
+    autoplay
+    playsinline
+    muted
+    loop
+  ></video>
+  <div class="text">
+    <% if (slide.text) { %>
+    <div class="words">
+      <%= t.renderMarkdown(slide.text) %>
+    </div>
+    <% } else if (slide.headline) { %>
+    <h2><%= slide.headline %></h2>
+    <% } else { %>
+    <div class="scroll-bug" aria-hidden="true">
+      scroll
+      <svg viewBox="0 0 50 50" width="50" height="25">
+        <path
+        d="M 0,0 L 25,25 50,0"
+        ></path>
+      </svg>
+    </div>
+    <% } %>
+  </div>
+</section>

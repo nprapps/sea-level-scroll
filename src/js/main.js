@@ -1,8 +1,10 @@
 var $ = require("./lib/qsa");
+require("./lib/edgeBuffer");
 var track = require("./lib/tracking");
 var mapHandler = require("./mapView");
 var imageHandler = require("./imageView");
 var multImageHandler = require("./multImageView");
+var videoView = require("./videoView");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -12,11 +14,13 @@ var map = L.map("base-map", { zoomControl: false }).setView(
   10
 );
 L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  "https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     maxZoom: 19,
     attribution: "",
     id: "baseLayer",
+    subdomains: ['services', 'server'],
+    edgeBufferTiles: 3,
   }
 ).addTo(map);
 
@@ -26,11 +30,13 @@ var handlers = {
   map: mapHandler,
   image: imageHandler,
   longText: multImageHandler,
+  video: videoView,
 };
 
 var active;
 var activateSlide = function (slide) {
   // If we changed block type, let the previous director leave
+  if (active == slide) return;
   var currType = slide.dataset.type || 'image';
   if (handler && handler != handlers[currType]) {
     handler.exit();
@@ -39,6 +45,18 @@ var activateSlide = function (slide) {
   handler = handlers[currType];
   handler.enter(slide, map);
   active = slide;
+
+  // Lazy-load neighboring slides
+  var neighbors = [-1, 0, 1, 2];
+  var all = $(".sequence .slide");
+  var index = all.indexOf(slide);
+  neighbors.forEach(function (offset) {
+    var neighbor = all[index + offset];
+    if (!neighbor) return;
+    var currType = neighbor.dataset.type || 'image';
+    var neighborHandler = handlers[currType];
+    neighborHandler.preload(neighbor, map);
+  });
 };
 
 var onScroll = function () {

@@ -1,7 +1,7 @@
 <section class="image slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>" data-type="image">
   <img
-    src="./assets/synced/<%= slide.image %>"
     class="backdrop"
+    data-src="./assets/synced/<%= slide.image %>"
     alt=""
     style="<%= t.style({
       "object-fit": slide.contain ? "contain" : false,

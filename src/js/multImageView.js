@@ -1,7 +1,7 @@
 var $ = require("./lib/qsa");
 
 var active;
-// fix mee
+// fix mee i'm broken and maybe unnecessary anyway
 var enter = function (slide) {
   slide.classList.add("active");
   slide.classList.remove("exiting");
@@ -31,7 +31,11 @@ var exit = function() {
     active.classList.add("exiting");
     setTimeout(() => active.classList.remove("exiting"), 2000);
   }
+  active= null;
+}
+
+var preload = function() {
   // active= null;
 }
 
-module.exports = { enter, exit };
+module.exports = { enter, exit, preload };
