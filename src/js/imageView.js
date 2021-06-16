@@ -6,13 +6,7 @@ var enter = function (slide) {
 };
 
 var exit = function () {
-  if (active) {
-    active.classList.remove("active");
-    active.classList.add("exiting");
-    setTimeout(function() { if (active) active.classList.remove("exiting");}, 2000);
-  }
-  active = null;
-  exiting = null;
+
 };
 
 var preload = function (slide) {

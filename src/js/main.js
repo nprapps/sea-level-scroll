@@ -21,6 +21,7 @@ L.tileLayer(
     id: "baseLayer",
     subdomains: ['services', 'server'],
     edgeBufferTiles: 3,
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
   }
 ).addTo(map);
 
@@ -37,13 +38,19 @@ var active;
 var exiting;
 var activateSlide = function (slide) {
   // If we changed block type, let the previous director leave
-  if (active == slide) return;
+  if (slide == active) {
+    if (slide.dataset.type == "longText") {
+      handler.enter(slide, map);
+    }
+    return;
+  };
   var currType = slide.dataset.type || 'image';
   if (handler && handler != handlers[currType]) {
     handler.exit();
   }
 
-  if (slide == active) return;
+  handler = handlers[currType];
+
   exiting = active;
   slide.classList.add("active");
   slide.classList.remove("exiting");
@@ -55,7 +62,6 @@ var activateSlide = function (slide) {
     setTimeout(() => exiting.classList.remove("exiting"), 2000);
   }
   
-  handler = handlers[currType];
   handler.enter(slide, map);
 
   // Lazy-load neighboring slides
