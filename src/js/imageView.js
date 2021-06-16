@@ -3,18 +3,6 @@ var $ = require("./lib/qsa");
 var active;
 var exiting;
 var enter = function (slide) {
-
-  if (slide == active) return;
-  exiting = active;
-  slide.classList.add("active");
-  slide.classList.remove("exiting");
-  active = slide;
-
-  if (exiting) {
-    exiting.classList.remove("active");
-    exiting.classList.add("exiting");
-    setTimeout(() => exiting.classList.remove("exiting"), 2000);
-  }
 };
 
 var exit = function () {

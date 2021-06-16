@@ -34,6 +34,7 @@ var handlers = {
 };
 
 var active;
+var exiting;
 var activateSlide = function (slide) {
   // If we changed block type, let the previous director leave
   if (active == slide) return;
@@ -41,10 +42,21 @@ var activateSlide = function (slide) {
   if (handler && handler != handlers[currType]) {
     handler.exit();
   }
+
+  if (slide == active) return;
+  exiting = active;
+  slide.classList.add("active");
+  slide.classList.remove("exiting");
+  active = slide;
+
+  if (exiting) {
+    exiting.classList.remove("active");
+    exiting.classList.add("exiting");
+    setTimeout(() => exiting.classList.remove("exiting"), 2000);
+  }
   
   handler = handlers[currType];
   handler.enter(slide, map);
-  active = slide;
 
   // Lazy-load neighboring slides
   var neighbors = [-1, 0, 1, 2];
