@@ -16,11 +16,10 @@ var map = L.map("base-map", { zoomControl: false }).setView(
 L.tileLayer(
   "https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
-    maxZoom: 19,
     attribution: "",
     id: "baseLayer",
     subdomains: ['services', 'server'],
-    edgeBufferTiles: 3,
+    edgeBufferTiles: 2,
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
   }
 ).addTo(map);
@@ -71,9 +70,9 @@ var activateSlide = function (slide) {
   neighbors.forEach(function (offset) {
     var neighbor = all[index + offset];
     if (!neighbor) return;
-    var currType = neighbor.dataset.type || 'image';
-    var neighborHandler = handlers[currType];
-    neighborHandler.preload(neighbor, map);
+    var nextType = neighbor.dataset.type || 'image';
+    var neighborHandler = handlers[nextType];
+    neighborHandler.preload(neighbor, handler != neighborHandler && Math.abs(offset) == 1, map);
   });
 };
 
