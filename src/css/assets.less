@@ -1,9 +1,23 @@
+@import "values";
+
+@keyframes grow-in {
+  from {
+    transform: scaleX(.3);
+    transform: scaleY(.3);
+    fill-opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    transform: scaleY(1);
+    fill-opacity: 0.7;
+  }
+}
+
 path {
   &.flood {
     fill: #3a745d;
-    fill-opacity: 0.4;
     stroke-width: 1px;
-    stroke: #fff;
+    stroke: none;
   }
 
   &.levee {
@@ -22,12 +36,20 @@ path {
   stroke-width: .5px;
   fill-opacity: .8;
   &.google {
-    fill: #E38D2C;
-    stroke: #E38D2C;
+    fill: @google;
+    stroke: @google;
   }
 
   &.fb {
-    fill: #EFC637;
-    stroke: #EFC637;
+    fill: @facebook;
+    stroke: @facebook;
   }
 }
+
+path.flood {
+      animation-name: grow-in;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+      animation-play-state: inherit;
+      fill-opacity: 0.7;
+  }

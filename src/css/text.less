@@ -1,10 +1,12 @@
+@import "values";
+
 .slide.text {
   background: #111;
   color: #eee;
   padding: 20vh 0 60vh;
 
   .text {
-  	// font-family: @serif;
+    // font-family: @serif;
     background: inherit;
     color: inherit;
     margin: 0 auto;
@@ -25,7 +27,6 @@
       font-size: 15px;
     }
 
-
     .section-opener&::before {
       display: block;
       border-top: 1px solid white;
@@ -39,5 +40,40 @@
   & + .slide .text {
     margin-top: 30vh;
   }
+}
 
+.key {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  .key-item {
+    display: inline-block;
+    margin: 0 18px 0 0;
+    padding: 0;
+    line-height: 15px;
+
+    b {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 6px;
+      float: left;
+    }
+
+    &.google b {
+      background-color: @google;
+    }
+
+    &.facebook b {
+      background-color: @facebook;
+    }
+
+    label {
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: normal;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
 }

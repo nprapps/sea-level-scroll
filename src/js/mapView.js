@@ -22,6 +22,23 @@ var enter = function (slide, map) {
     map.removeLayer(layer);
   });
 
+  var southWestBounds = currLayer.southWest.split(",");
+  var northEastBounds = currLayer.northEast.split(",");
+
+  var southWest = L.latLng(southWestBounds[0], southWestBounds[1]),
+    northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
+    bounds = L.latLngBounds(southWest, northEast);
+
+  if (currLayer.duration > 0) {
+    map.flyToBounds(bounds, {
+      animate: true,
+      duration: 2,
+      easeLinearity: 1,
+    });
+  } else {
+    map.fitBounds(bounds, currLayer.zoomLevel);
+  }
+
   // Add new layers onto slide.
   assets.forEach(function (a) {
     if (mapAssets[a]) {
@@ -48,23 +65,6 @@ var enter = function (slide, map) {
         }),
       }).addTo(map);
     });
-  }
-
-  var southWestBounds = currLayer.southWest.split(",");
-  var northEastBounds = currLayer.northEast.split(",");
-
-  var southWest = L.latLng(southWestBounds[0], southWestBounds[1]),
-    northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
-    bounds = L.latLngBounds(southWest, northEast);
-
-  if (currLayer.duration > 0) {
-    map.flyToBounds(bounds, {
-      animate: true,
-      duration: 2,
-      easeLinearity: 1,
-    });
-  } else {
-    map.fitBounds(bounds, currLayer.zoomLevel);
   }
 
   active = slide;
