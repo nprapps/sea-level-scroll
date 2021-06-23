@@ -22,38 +22,27 @@ var enter = function (slide, map) {
     map.removeLayer(layer);
   });
 
-  var southWestBounds = currLayer.southWest.split(",");
-  var northEastBounds = currLayer.northEast.split(",");
-
-  var southWest = L.latLng(southWestBounds[0], southWestBounds[1]),
-    northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
-    bounds = L.latLngBounds(southWest, northEast);
-
-  if (currLayer.duration > 0) {
-    map.flyToBounds(bounds, {
-      animate: true,
-      duration: 2,
-      easeLinearity: 1,
-    });
-  } else {
-    map.fitBounds(bounds, currLayer.zoomLevel);
-  }
-
-  // Add new layers onto slide.
-  assets.forEach(function (a) {
-    if (mapAssets[a]) {
-      mapAssets[a].addTo(map);
-    } else {
-      var styles = { className: assetKey[a].classNames.split(",").join("") };
-      fetchAsset(assetKey[a].path).then(function (d) {
-        mapAssets[a] = L.geoJSON(d, { id: a, style: styles });
-        mapAssets[a].addTo(map);
-      });
-    }
+  map.flyToBounds(getBounds(currLayer), {
+    animate: currLayer.duration > 0,
+    duration: currLayer.duration,
   });
 
-  if (currLayer.label_ids) {
-    currLayer.label_ids.split(",").forEach(function (a) {
+  // Add new layers onto slide.
+  addAssets(map, assets);
+  addMarkers(map, currLayer);
+
+  active = slide;
+  return mapElement;
+};
+
+var exit = function () {
+  mapElement.classList.add("hidden");
+  active = null;
+};
+
+var addMarkers = function(map, layer) {
+  if (layer.label_ids) {
+    layer.label_ids.split(",").forEach(function (a) {
       var label = labelKey[a.trim()];
       if (!label) return;
       var [lat, lon] = label.lat_long.split(",");
@@ -66,52 +55,59 @@ var enter = function (slide, map) {
       }).addTo(map);
     });
   }
-
-  active = slide;
-  return mapElement;
-};
-
-function style(feature) {
-  return {
-    weight: 3,
-    color: "#fff",
-    className: "test-class",
-  };
 }
 
-var exit = function () {
-  mapElement.classList.add("hidden");
-  active = null;
+// Add all current assets to the map.
+var addAssets = function (map, assets) {
+  assets.forEach(function (a) {
+    if (mapAssets[a]) {
+      mapAssets[a].addTo(map);
+    } else {
+      loadAsset(assetKey[a], a, map);
+    }
+  });
 };
 
 var preload = async function (slide, preZoom, map) {
   if (preZoom) {
     var currLayer = mapKey[slide.id];
-
-    var southWestBounds = currLayer.southWest.split(",");
-    var northEastBounds = currLayer.northEast.split(",");
-
-    var southWest = L.latLng(southWestBounds[0], southWestBounds[1]),
-      northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
-      bounds = L.latLngBounds(southWest, northEast);
-    map.fitBounds(bounds, currLayer.zoomLevel);
+    map.fitBounds(getBounds(currLayer), currLayer.zoomLevel);
   }
 };
 
+// Get lat/long bounds to zoom to.
+var getBounds = function (layer) {
+  var southWestBounds = layer.southWest.split(",");
+  var northEastBounds = layer.northEast.split(",");
+
+  var southWest = L.latLng(southWestBounds[0], southWestBounds[1]),
+    northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
+    bounds = L.latLngBounds(southWest, northEast);
+  return bounds;
+};
+
+// Async fetch assets.
 var fetchAsset = async function (asset) {
   var response = await fetch(`../assets/synced/${asset}`);
   var json = await response.json();
   return json;
 };
 
+// Loads an asset, optionally adds to map.
+var loadAsset = function (value, id, opt_map) {
+  if (!value.path) return;
+  var styles = { className: value.classNames.split(",").join("") };
+  fetchAsset(value.path).then(function (d) {
+    mapAssets[id] = L.geoJSON(d, { id: id, style: styles });
+    if (opt_map) mapAssets[id].addTo(opt_map);
+  });
+};
+
+// Attempt at loading all assets on page load in the background.
 var loadAssets = (function () {
   Object.entries(assetKey).forEach(function (a) {
     var [id, value] = a;
-    if (!value.path) return;
-    var styles = { className: value.classNames.split(",").join("") };
-    fetchAsset(value.path).then(
-      d => (mapAssets[id] = L.geoJSON(d, { id: id, style: styles }))
-    );
+    loadAsset(value, id);
   });
 })();
 
