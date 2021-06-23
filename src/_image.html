@@ -11,14 +11,5 @@
   <% if (slide.inset) { %>
   <img class="inset" src="./assets/synced/<%= slide.inset%>" alt="">
   <% } %>
-  <div class="text">
-    <div class="content">
-      <%= t.renderMarkdown(slide.text) %>
-    </div>
-    <% if (slide.caption) { %>
-    <div class="caption">
-      <span class="sr-only">Caption:</span> <%= slide.caption %>
-    </div>
-    <% } %>
-  </div>
+  <%= t.include("partials/_text.html", { slide }) %>
 </section>

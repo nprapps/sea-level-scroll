@@ -25,10 +25,14 @@ path {
   }
 }
 
-.water-label {
-  span {
-    font-weight: 500;
+.water-label, .place-label {
+  font-weight: 500;
+  color: #fff;
+  text-anchor: left;
+
+  &.on-background {
     color: #fff;
+    text-shadow: 0 0 2px #333;
   }
 }
 
@@ -44,6 +48,20 @@ path {
     fill: @facebook;
     stroke: @facebook;
   }
+}
+
+.east-palo-alto {
+  stroke: #fff;
+  stroke-width: .5px;
+  fill: #eee;
+  fill-opacity: .4;
+}
+
+.belle-haven {
+  stroke: #aaa;
+  stroke-width: .5px;
+  fill: #ccc;
+  fill-opacity: .4;
 }
 
 path.flood {

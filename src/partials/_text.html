@@ -1,0 +1,25 @@
+<% if (Array.isArray(slide.text)) {
+    slide.text.forEach(function(d) { %>
+      <div class="text">
+    <div class="content">
+      <%= t.renderMarkdown(d.text) %>
+    </div>
+    <% if (d.caption) { %>
+    <div class="caption">
+      <span class="sr-only">Caption:</span> <%= d.caption %>
+    </div>
+    <% } %>
+  </div>
+
+  <% }) } else { %>
+  <div class="text">
+    <div class="content">
+      <%= t.renderMarkdown(slide.text) %>
+    </div>
+    <% if (slide.caption) { %>
+    <div class="caption">
+      <span class="sr-only">Caption:</span> <%= slide.caption %>
+    </div>
+    <% } %>
+  </div>
+  <% } %>

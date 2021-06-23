@@ -54,7 +54,7 @@ var enter = function (slide, map) {
 
   if (currLayer.label_ids) {
     currLayer.label_ids.split(",").forEach(function (a) {
-      var label = labelKey[a];
+      var label = labelKey[a.trim()];
       if (!label) return;
       var [lat, lon] = label.lat_long.split(",");
       new L.Marker([lat, lon], {
