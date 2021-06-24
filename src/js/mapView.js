@@ -1,4 +1,5 @@
 var $ = require("./lib/qsa");
+var { isMobile } = require("./lib/breakpoints");
 var mapKey = require("../../data/map_keys.sheet.json");
 var assetKey = require("../../data/asset_keys.sheet.json");
 var labelKey = require("../../data/label_keys.sheet.json");
@@ -7,6 +8,8 @@ var mapElement = $.one("#base-map");
 
 var active;
 var mapAssets = {};
+
+console.log(isMobile);
 
 var enter = function (slide, map) {
   // if (slide == active) return;
@@ -40,7 +43,7 @@ var exit = function () {
   active = null;
 };
 
-var addMarkers = function(map, layer) {
+var addMarkers = function (map, layer) {
   if (layer.label_ids) {
     layer.label_ids.split(",").forEach(function (a) {
       var label = labelKey[a.trim()];
@@ -55,7 +58,7 @@ var addMarkers = function(map, layer) {
       }).addTo(map);
     });
   }
-}
+};
 
 // Add all current assets to the map.
 var addAssets = function (map, assets) {
@@ -77,8 +80,12 @@ var preload = async function (slide, preZoom, map) {
 
 // Get lat/long bounds to zoom to.
 var getBounds = function (layer) {
-  var southWestBounds = layer.southWest.split(",");
-  var northEastBounds = layer.northEast.split(",");
+  var southWestBounds = isMobile
+    ? layer.mobile_southWest.split(",")
+    : layer.southWest.split(",");
+  var northEastBounds = isMobile
+    ? layer.mobile_northEast.split(",")
+    : layer.northEast.split(",");
 
   var southWest = L.latLng(southWestBounds[0], southWestBounds[1]),
     northEast = L.latLng(northEastBounds[0], northEastBounds[1]),
