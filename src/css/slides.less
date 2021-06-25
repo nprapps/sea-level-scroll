@@ -75,7 +75,7 @@
   &.exiting {
     .backdrop {
       display: block;
-      animation: fade-out .2s linear;
+      animation: fade-out 1s linear;
       opacity: 0;
     }
   }
@@ -186,7 +186,8 @@
 
 }
 
-#base-map {z-index: -1;
+#base-map {
+    z-index: 100;
     position: relative;
     clear: right;
     position: fixed;
@@ -198,9 +199,12 @@
     top: 0;
     left: 0;
     animation: none;
+    opacity: 0;
 
-    &.hidden {
-      opacity: 0;
+    &.active {
+      animation-name: fade-in;
+      animation-duration: 2s;
+      opacity: 1;
     }
   }
 

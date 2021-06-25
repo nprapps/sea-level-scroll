@@ -13,7 +13,7 @@ console.log(isMobile);
 
 var enter = function (slide, map) {
   // if (slide == active) return;
-  mapElement.classList.remove("hidden");
+  mapElement.classList.add("active");
   var currLayer = mapKey[slide.id];
   var assets = currLayer.assets
     ? currLayer.assets.split(",").map(d => d.trim())
@@ -39,7 +39,8 @@ var enter = function (slide, map) {
 };
 
 var exit = function () {
-  mapElement.classList.add("hidden");
+  mapElement.classList.add("exiting");
+  mapElement.classList.remove("active");
   active = null;
 };
 
