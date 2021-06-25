@@ -54,7 +54,7 @@ var addMarkers = function (map, layer) {
         icon: new L.DivIcon({
           className: label.classNames.split(",").join(" "),
           html: `<span>${label.label}</span>`,
-          iconSize: [150, 30],
+          iconSize: [20, 20],
         }),
       }).addTo(map);
     });
