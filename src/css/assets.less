@@ -2,8 +2,8 @@
 
 @keyframes grow-in {
   from {
-    transform: scaleX(.3);
-    transform: scaleY(.3);
+    transform: scaleX(0.3);
+    transform: scaleY(0.3);
     fill-opacity: 0;
   }
   to {
@@ -13,11 +13,23 @@
   }
 }
 
+// Style leaflet tiles to help layers pop.
+.leaflet-tile-container {
+  filter: grayscale(30%) contrast(110%) brightness(0.85);
+}
+
 path {
   &.flood {
     fill: #3a745d;
     stroke-width: 1px;
     stroke: none;
+
+    // Will replace these
+    animation-name: grow-in;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-play-state: inherit;
+    fill-opacity: 0.7;
   }
 
   &.levee {
@@ -29,7 +41,37 @@ path {
   }
 }
 
-.water-label, .place-label {
+.parcels {
+  stroke-width: 0.5px;
+  fill-opacity: 0.8;
+  &.google {
+    fill: @google;
+    stroke: @google;
+  }
+
+  &.fb {
+    fill: @facebook;
+    stroke: @facebook;
+  }
+}
+
+.east-palo-alto {
+  stroke: #fff;
+  stroke-width: 0.5px;
+  fill: #eee;
+  fill-opacity: 0.4;
+}
+
+.belle-haven {
+  stroke: #aaa;
+  stroke-width: 0.5px;
+  fill: #ccc;
+  fill-opacity: 0.4;
+}
+
+// Marker styles
+.water-label,
+.place-label {
   font-weight: 500;
   color: #fff;
   text-anchor: left;
@@ -52,43 +94,3 @@ path {
   line-height: 22px;
   font-size: 10px;
 }
-
-.parcels {
-  stroke-width: .5px;
-  fill-opacity: .8;
-  &.google {
-    fill: @google;
-    stroke: @google;
-  }
-
-  &.fb {
-    fill: @facebook;
-    stroke: @facebook;
-  }
-}
-
-.east-palo-alto {
-  stroke: #fff;
-  stroke-width: .5px;
-  fill: #eee;
-  fill-opacity: .4;
-}
-
-.belle-haven {
-  stroke: #aaa;
-  stroke-width: .5px;
-  fill: #ccc;
-  fill-opacity: .4;
-}
-
-path.flood {
-      animation-name: grow-in;
-      animation-duration: 3s;
-      animation-timing-function: linear;
-      animation-play-state: inherit;
-      fill-opacity: 0.7;
-  }
-
-  .leaflet-tile-container {
-    filter: grayscale(30%) contrast(110%) brightness(0.85);
-  }
