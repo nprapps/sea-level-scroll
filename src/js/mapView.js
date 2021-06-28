@@ -9,7 +9,6 @@ var mapElement = $.one("#base-map");
 var active;
 var mapAssets = {};
 
-console.log(isMobile);
 
 var enter = function (slide, map) {
   // if (slide == active) return;
@@ -54,7 +53,7 @@ var addMarkers = function (map, layer) {
         icon: new L.DivIcon({
           className: label.classNames.split(",").join(" "),
           html: `<span>${label.label}</span>`,
-          iconSize: [20, 20],
+          iconSize: label.classNames.includes('highway') ? [20, 20] : [150, 20],
         }),
       }).addTo(map);
     });

@@ -1,12 +1,20 @@
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 // weird flex but okay
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .slide {
@@ -14,12 +22,15 @@
   position: relative;
   overflow: hidden;
 
-  a, a:visited {
+  a,
+  a:visited {
     color: @gray-intermediate;
     text-decoration: none;
   }
 
-  a:hover, a:active, a:focus {
+  a:hover,
+  a:active,
+  a:focus {
     color: @gray-medium;
   }
 
@@ -75,7 +86,7 @@
   &.exiting {
     .backdrop {
       display: block;
-      animation: fade-out 1s linear;
+      animation: fade-out 3s linear;
       opacity: 0;
     }
   }
@@ -141,12 +152,13 @@
     }
   }
 
-  &.image, &.map, &.video {
+  &.image,
+  &.map,
+  &.video {
     .backdrop {
       object-fit: cover;
     }
   }
-
 
   p.sat-attribution {
     position: absolute;
@@ -155,7 +167,7 @@
     color: white;
     .gotham();
     font-size: 10px;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   .fade {
@@ -166,7 +178,6 @@
       height: 90vh;
     }
   }
-
 
   &.chart h1 {
     .gotham();
@@ -183,30 +194,56 @@
     color: white;
     font-weight: normal;
   }
-
 }
 
 #base-map {
-    z-index: 100;
-    position: relative;
-    clear: right;
-    position: fixed;
-    overflow: hidden;
-    object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    animation: none;
-    opacity: 0;
+  z-index: 100;
+  position: relative;
+  clear: right;
+  position: fixed;
+  overflow: hidden;
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  animation: none;
+  opacity: 0;
 
-    &.active {
-      animation-name: fade-in;
-      animation-duration: 2s;
-      opacity: 1;
+  &.active {
+    animation-name: fade-in;
+    animation-duration: 3s;
+    opacity: 1;
+  }
+}
+
+section.standalone {
+  box-shadow: 0 0 18px 18px fade(black, 20%);
+  .content {
+    background-color: #fff;
+    .gotham();
+    padding: 10vh 0;
+    font-weight: 400;
+    font-size: 15px;
+    color: #333;
+
+    p {
+      width: 60%;
+      margin: 20px auto;
+
+      @media @mobile { 
+        width: 90%;
+      }
     }
   }
+}
+
+section.standalone + section {
+  .text {
+    margin-top: 50vh;
+  }
+}
 
 // slide types
 @import "text";
