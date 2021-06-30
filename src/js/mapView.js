@@ -15,6 +15,7 @@ var enter = function (slide, map) {
   // if (slide == active) return;
   mapElement.classList.remove("hidden");
   var currLayer = mapKey[slide.id];
+  // console.log(currLayer)
   var assets = currLayer.assets
     ? currLayer.assets.split(",").map(d => d.trim())
     : [];
@@ -31,7 +32,7 @@ var enter = function (slide, map) {
   });
 
   // Add new layers onto slide.
-  addAssets(map, assets);
+  addAssets(map, assets, currLayer.effects);
   addMarkers(map, currLayer);
 
   active = slide;
@@ -61,12 +62,18 @@ var addMarkers = function (map, layer) {
 };
 
 // Add all current assets to the map.
-var addAssets = function (map, assets) {
+var addAssets = function (map, assets, opt_effects) {
   assets.forEach(function (a) {
     if (mapAssets[a]) {
+      // console.log(`${a} added`);
+      if (opt_effects) {
+        var style = styleAsset(assetKey[a], opt_effects);
+        mapAssets[a].setStyle(style);
+      }
       mapAssets[a].addTo(map);
     } else {
-      loadAsset(assetKey[a], a, map);
+      // console.log(`${a} loaded`);
+      loadAsset(assetKey[a], a, map, opt_effects);
     }
   });
 };
@@ -101,13 +108,30 @@ var fetchAsset = async function (asset) {
 };
 
 // Loads an asset, optionally adds to map.
-var loadAsset = function (value, id, opt_map) {
+var loadAsset = function (value, id, opt_map, opt_effects) {
   if (!value.path) return;
-  var styles = { className: value.classNames.split(",").join("") };
+
   fetchAsset(value.path).then(function (d) {
-    mapAssets[id] = L.geoJSON(d, { id: id, style: styles });
+    var style = styleAsset(value, opt_effects);
+    mapAssets[id] = L.geoJSON(d, {
+      id,
+      style,
+    });
     if (opt_map) mapAssets[id].addTo(opt_map);
   });
+};
+
+var styleAsset = function (value, opt_effects) {
+  var classNameList = value.classNames.split(",");
+
+  if (opt_effects) {
+    var effect = opt_effects[value.key];
+    if (effect) {
+      classNameList.push(` asset-${effect}`);
+      console.log(`${value.key} - ${classNameList.join("")}`);
+    }
+  }
+  return () => ({ className: classNameList.join("") });
 };
 
 // Attempt at loading all assets on page load in the background.

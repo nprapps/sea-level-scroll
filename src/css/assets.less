@@ -1,21 +1,36 @@
 @import "values";
 
-@keyframes grow-in {
+@keyframes fadeIn {
   from {
-    transform: scaleX(.3);
-    transform: scaleY(.3);
+    //transform: scaleX(0.3);
+    //transform: scaleY(0.3);
     fill-opacity: 0;
   }
   to {
-    transform: scaleX(1);
-    transform: scaleY(1);
+    //transform: scaleX(1);
+    //transform: scaleY(1);
     fill-opacity: 0.7;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    fill-opacity: 0.7;
+  }
+  to {
+    fill-opacity: 0;
   }
 }
 
 path {
   &.flood {
     fill: #3a745d;
+    /*&.flood-50 {
+      fill: turquoise;
+    }
+    &.flood-100 {
+      fill: red;
+    }*/
     stroke-width: 1px;
     stroke: none;
   }
@@ -29,7 +44,8 @@ path {
   }
 }
 
-.water-label, .place-label {
+.water-label,
+.place-label {
   font-weight: 500;
   color: #fff;
   text-anchor: left;
@@ -41,8 +57,8 @@ path {
 }
 
 .parcels {
-  stroke-width: .5px;
-  fill-opacity: .8;
+  stroke-width: 0.5px;
+  fill-opacity: 0.8;
   &.google {
     fill: @google;
     stroke: @google;
@@ -56,22 +72,35 @@ path {
 
 .east-palo-alto {
   stroke: #fff;
-  stroke-width: .5px;
+  stroke-width: 0.5px;
   fill: #eee;
-  fill-opacity: .4;
+  fill-opacity: 0.4;
 }
 
 .belle-haven {
   stroke: #aaa;
-  stroke-width: .5px;
+  stroke-width: 0.5px;
   fill: #ccc;
-  fill-opacity: .4;
+  fill-opacity: 0.4;
 }
 
 path.flood {
-      animation-name: grow-in;
-      animation-duration: 3s;
-      animation-timing-function: linear;
-      animation-play-state: inherit;
-      fill-opacity: 0.7;
+  // animation-name: grow-in;
+  animation-timing-function: linear;
+  animation-play-state: inherit;
+  fill-opacity: 0.7;
+
+  /*&.asset-enter {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    fill-opacity: 0.7;
+    //stroke: red;
   }
+
+  &.asset-exit {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    fill-opacity: 0;
+    //stroke: blue;
+  }*/
+}
