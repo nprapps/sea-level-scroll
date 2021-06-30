@@ -37,19 +37,24 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
           </div>
         </div>
       </header>
+
+      <%= t.include("_svgFilters.html") %> 
+
       <div
-    id="base-map"
-    class="backdrop hidden"
-    alt=""
-    style="z-index:-1"
+        id="base-map"
+        class="backdrop hidden"
+        alt=""
+        style="z-index:-1"
       >
-    </div>
+      </div>
+
       <%
         doc.sequence.forEach(function(slide) {
           if (slide.type == "skip") return;
           print(t.include(`_${slide.type || "image"}.html`, { slide }));
         });
       %>
+
     </main>
 
     <footer class="closing">
