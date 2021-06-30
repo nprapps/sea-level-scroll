@@ -3,7 +3,6 @@ require("./lib/edgeBuffer");
 var track = require("./lib/tracking");
 var mapHandler = require("./mapView");
 var imageHandler = require("./imageView");
-var multImageHandler = require("./multImageView");
 var videoView = require("./videoView");
 var standaloneView = require("./standaloneView");
 
