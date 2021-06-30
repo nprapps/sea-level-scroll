@@ -5,6 +5,7 @@ var mapHandler = require("./mapView");
 var imageHandler = require("./imageView");
 var multImageHandler = require("./multImageView");
 var videoView = require("./videoView");
+var standaloneView = require("./standaloneView");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -29,7 +30,7 @@ var handler;
 var handlers = {
   map: mapHandler,
   image: imageHandler,
-  longText: multImageHandler,
+  standaloneText: standaloneView,
   video: videoView,
 };
 

@@ -40,6 +40,7 @@ var enter = function (slide, map) {
 var exit = function () {
   mapElement.classList.add("exiting");
   mapElement.classList.remove("active");
+  setTimeout(() => mapElement.classList.remove("exiting"), 1000);
   active = null;
 };
 

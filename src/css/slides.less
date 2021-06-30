@@ -86,7 +86,7 @@
   &.exiting {
     .backdrop {
       display: block;
-      animation: fade-out 3s linear;
+      animation: fade-out .2s linear;
       opacity: 0;
     }
   }
@@ -94,6 +94,7 @@
   &.active {
     .backdrop {
       display: block;
+      animation: fade-in .2s linear;
       opacity: 1;
     }
 
@@ -213,13 +214,19 @@
 
   &.active {
     animation-name: fade-in;
-    animation-duration: 3s;
+    animation-duration: .2s;
     opacity: 1;
+  }
+
+  &.exiting {
+    animation-name: fade-out;
+    animation-duration: .2s;
+    opacity: 0;
   }
 }
 
 section.standalone {
-  box-shadow: 0 0 18px 18px fade(black, 20%);
+  box-shadow: 0 0 18px -18px fade(black, 20%);
   .content {
     background-color: #fff;
     .gotham();
@@ -239,9 +246,19 @@ section.standalone {
   }
 }
 
-section.standalone + section {
-  .text {
-    margin-top: 50vh;
+section.standalone + section.active {
+  display: inline;
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  &.active {
+    img.backdrop {
+      position: sticky;
+      top: 0;
+    }
   }
 }
 
