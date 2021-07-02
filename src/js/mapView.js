@@ -128,7 +128,7 @@ var styleAsset = function (value, opt_effects) {
     var effect = opt_effects[value.key];
     if (effect) {
       classNameList.push(` asset-${effect}`);
-      console.log(`${value.key} - ${classNameList.join("")}`);
+      // console.log(`${value.key} - ${classNameList.join("")}`);
     }
   }
   return () => ({ className: classNameList.join("") });

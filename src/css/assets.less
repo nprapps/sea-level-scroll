@@ -24,17 +24,11 @@
 
 path {
   &.flood {
-    //fill: #3a745d;
-    /*&.flood-50 {
-      fill: turquoise;
-    }
-    &.flood-100 {
-      fill: red;
-    }*/
-    stroke-width: 1px;
-    stroke: rgb(58, 116, 93);
-    fill: url(#img1);
-    fill-opacity: 0.3;
+    stroke-width: 2px;
+    stroke: #ddd;
+    stroke-opacity: 1;
+    //fill: url(#img1);
+    fill-opacity: 0.7;
     filter: url(#filter-wave-effect);
   }
 
@@ -85,25 +79,4 @@ path {
   stroke-width: 0.5px;
   fill: #ccc;
   fill-opacity: 0.4;
-}
-
-path.flood {
-  // animation-name: grow-in;
-  /*animation-timing-function: linear;
-  animation-play-state: inherit;
-  fill-opacity: 0.7;*/
-
-  /*&.asset-enter {
-    animation-name: fadeIn;
-    animation-duration: 1s;
-    fill-opacity: 0.7;
-    //stroke: red;
-  }
-
-  &.asset-exit {
-    animation-name: fadeOut;
-    animation-duration: 1s;
-    fill-opacity: 0;
-    //stroke: blue;
-  }*/
 }
