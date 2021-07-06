@@ -27,9 +27,16 @@ path {
     stroke-width: 2px;
     stroke: #ddd;
     stroke-opacity: 1;
-    //fill: url(#img1);
-    fill-opacity: 0.7;
-    filter: url(#filter-wave-effect);
+
+    &.flood-50 {
+      filter: url(#filter-wave-50);
+      fill-opacity: 0.5;
+    }
+
+    &.flood-diff {
+      filter: url(#filter-wave-diff);
+      fill-opacity: 0.7;
+    }
   }
 
   &.levee {
