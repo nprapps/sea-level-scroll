@@ -8,11 +8,11 @@ var mapElement = $.one("#base-map");
 
 var active;
 var mapAssets = {};
-
+var pastBounds = null;
 
 var enter = function (slide, map) {
-  // if (slide == active) return;
   mapElement.classList.add("active");
+
   var currLayer = mapKey[slide.id];
   var assets = currLayer.assets
     ? currLayer.assets.split(",").map(d => d.trim())
@@ -24,14 +24,18 @@ var enter = function (slide, map) {
     map.removeLayer(layer);
   });
 
-  map.flyToBounds(getBounds(currLayer), {
-    animate: currLayer.duration > 0,
-    duration: currLayer.duration,
-  });
+  var bounds = getBounds(currLayer);
+  if (!bounds.equals(pastBounds)) {
+    map.flyToBounds(bounds, {
+      animate: currLayer.duration > 0,
+      duration: currLayer.duration,
+    });
+    pastBounds = bounds;
+  }
 
   // Add new layers onto slide.
   addAssets(map, assets);
-  addMarkers(map, currLayer);
+  addMarkers(map, currLayer, bounds);
 
   active = slide;
   return mapElement;
@@ -44,17 +48,20 @@ var exit = function () {
   active = null;
 };
 
-var addMarkers = function (map, layer) {
+var addMarkers = function (map, layer, bounds) {
   if (layer.label_ids) {
     layer.label_ids.split(",").forEach(function (a) {
       var label = labelKey[a.trim()];
       if (!label) return;
-      var [lat, lon] = label.lat_long.split(",");
-      new L.Marker([lat, lon], {
+      var [lat, lon] = label.lat_long.split(",").map(b => Number(b));
+      if (!bounds.contains(L.latLng([lat, lon])) && label.alt_lat_long) {
+        [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
+      }
+      var marker = new L.Marker([lat, lon], {
         icon: new L.DivIcon({
           className: label.classNames.split(",").join(" "),
           html: `<span>${label.label}</span>`,
-          iconSize: label.classNames.includes('highway') ? [20, 20] : [150, 20],
+          iconSize: label.classNames.includes("highway") ? [20, 20] : [150, 20],
         }),
       }).addTo(map);
     });
