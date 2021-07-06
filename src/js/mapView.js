@@ -6,7 +6,6 @@ var labelKey = require("../../data/label_keys.sheet.json");
 
 var mapElement = $.one("#base-map");
 
-var active;
 var mapAssets = {};
 var pastBounds = null;
 
@@ -18,11 +17,17 @@ var enter = function (slide, map) {
     ? currLayer.assets.split(",").map(d => d.trim())
     : [];
 
-  // Remove old layers.
+  // Remove old layers if layer isn't in new map
+  var keepAssets = [];
   map.eachLayer(function (layer) {
-    if (layer.options.id == "baseLayer") return;
+    var id = layer.options.id;
+    if ( !id || id == "baseLayer" || assets.includes(id)) {
+      keepAssets.push(id);
+      return;
+    }
     map.removeLayer(layer);
   });
+  assets = assets.filter(k => !keepAssets.includes(k))
 
   var bounds = getBounds(currLayer);
   if (!bounds.equals(pastBounds)) {
@@ -36,8 +41,6 @@ var enter = function (slide, map) {
   // Add new layers onto slide.
   addAssets(map, assets);
   addMarkers(map, currLayer, bounds);
-
-  active = slide;
   return mapElement;
 };
 
@@ -45,7 +48,6 @@ var exit = function () {
   mapElement.classList.add("exiting");
   mapElement.classList.remove("active");
   setTimeout(() => mapElement.classList.remove("exiting"), 1000);
-  active = null;
 };
 
 var addMarkers = function (map, layer, bounds) {
@@ -58,6 +60,7 @@ var addMarkers = function (map, layer, bounds) {
         [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
       }
       var marker = new L.Marker([lat, lon], {
+        id: a.trim(),
         icon: new L.DivIcon({
           className: label.classNames.split(",").join(" "),
           html: `<span>${label.label}</span>`,
@@ -72,6 +75,7 @@ var addMarkers = function (map, layer, bounds) {
 var addAssets = function (map, assets) {
   assets.forEach(function (a) {
     if (mapAssets[a]) {
+      console.log(a, mapAssets[a])
       mapAssets[a].addTo(map);
     } else {
       loadAsset(assetKey[a], a, map);
@@ -80,6 +84,7 @@ var addAssets = function (map, assets) {
 };
 
 var preload = async function (slide, preZoom, map) {
+  //TODO: preload asset
   if (preZoom) {
     var currLayer = mapKey[slide.id];
     map.fitBounds(getBounds(currLayer), currLayer.zoomLevel);
