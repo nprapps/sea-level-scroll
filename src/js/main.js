@@ -4,7 +4,8 @@ var track = require("./lib/tracking");
 var mapHandler = require("./mapView");
 var imageHandler = require("./imageView");
 var videoView = require("./videoView");
-var standaloneView = require("./standaloneView");
+var textView = require("./textView");
+// var mapToImageView = require("./mapToImageView");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -26,11 +27,13 @@ L.tileLayer(
 
 var completion = 0;
 var handler;
+
 var handlers = {
-  map: mapHandler,
-  image: imageHandler,
-  standaloneText: standaloneView,
-  video: videoView,
+  map: new mapHandler(map),
+  image: new imageHandler(),
+  video: new videoView(),
+  text: new textView(),
+  // mapToImage: new mapToImageView(),
 };
 
 var active;
@@ -44,22 +47,14 @@ var activateSlide = function (slide) {
     return;
   };
   var currType = slide.dataset.type || 'image';
-  if (handler && handler != handlers[currType]) {
-    handler.exit();
+  if (handler) {
+    handler.exit(active);
   }
 
   handler = handlers[currType];
 
   exiting = active;
-  slide.classList.add("active");
-  slide.classList.remove("exiting");
   active = slide;
-
-  if (exiting) {
-    exiting.classList.remove("active");
-    exiting.classList.add("exiting");
-    setTimeout(() => exiting.classList.remove("exiting"), 2000);
-  }
   
   handler.enter(slide, map);
 

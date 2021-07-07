@@ -1,0 +1,7 @@
+<section class="slide text" id="<%= slide.id %>" data-type="text">
+  <% if (slide.text) { %>
+    <div class="content">
+      <%= t.renderMarkdown(slide.text) %>
+    </div>
+    <%}%>
+</section>

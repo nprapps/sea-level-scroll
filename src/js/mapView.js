@@ -1,4 +1,6 @@
 var $ = require("./lib/qsa");
+var View = require("./view");
+
 var { isMobile } = require("./lib/breakpoints");
 var mapKey = require("../../data/map_keys.sheet.json");
 var assetKey = require("../../data/asset_keys.sheet.json");
@@ -9,45 +11,52 @@ var mapElement = $.one("#base-map");
 var mapAssets = {};
 var pastBounds = null;
 
-var enter = function (slide, map) {
-  mapElement.classList.add("active");
-
-  var currLayer = mapKey[slide.id];
-  var assets = currLayer.assets
-    ? currLayer.assets.split(",").map(d => d.trim())
-    : [];
-
-  // Remove old layers if layer isn't in new map
-  var keepAssets = [];
-  map.eachLayer(function (layer) {
-    var id = layer.options.id;
-    if ( !id || id == "baseLayer" || assets.includes(id)) {
-      keepAssets.push(id);
-      return;
-    }
-    map.removeLayer(layer);
-  });
-  assets = assets.filter(k => !keepAssets.includes(k))
-
-  var bounds = getBounds(currLayer);
-  if (!bounds.equals(pastBounds)) {
-    map.flyToBounds(bounds, {
-      animate: currLayer.duration > 0,
-      duration: currLayer.duration,
-    });
-    pastBounds = bounds;
+module.exports = class MapView extends View {
+  constructor() {
+    super();
   }
 
-  // Add new layers onto slide.
-  addAssets(map, assets);
-  addMarkers(map, currLayer, bounds);
-  return mapElement;
-};
+  enter(slide, map) {
+    super.enter(slide);
+    var currLayer = mapKey[slide.id];
+    var assets = currLayer.assets
+      ? currLayer.assets.split(",").map(d => d.trim())
+      : [];
 
-var exit = function () {
-  mapElement.classList.add("exiting");
-  mapElement.classList.remove("active");
-  setTimeout(() => mapElement.classList.remove("exiting"), 1000);
+    // Remove old layers if layer isn't in new map
+    var keepAssets = [];
+    map.eachLayer(function (layer) {
+      var id = layer.options.id;
+      if (!id || id == "baseLayer" || assets.includes(id)) {
+        keepAssets.push(id);
+        return;
+      }
+      map.removeLayer(layer);
+    });
+    assets = assets.filter(k => !keepAssets.includes(k));
+
+    var bounds = getBounds(currLayer);
+    if (!bounds.equals(pastBounds)) {
+      map.flyToBounds(bounds, {
+        animate: currLayer.duration > 0,
+        duration: currLayer.duration,
+      });
+      pastBounds = bounds;
+    }
+
+    // Add new layers onto slide.
+    addAssets(map, assets);
+    addMarkers(map, currLayer, bounds);
+    return mapElement;
+  }
+
+  exit(slide) {
+
+    super.exit(slide);
+    // mapElement.classList.add("exiting");
+    // mapElement.classList.remove("active");
+    // setTimeout(() => mapElement.classList.remove("exiting"), 1000);
+  }
 };
 
 var addMarkers = function (map, layer, bounds) {
@@ -75,7 +84,7 @@ var addMarkers = function (map, layer, bounds) {
 var addAssets = function (map, assets) {
   assets.forEach(function (a) {
     if (mapAssets[a]) {
-      console.log(a, mapAssets[a])
+      console.log(a, mapAssets[a]);
       mapAssets[a].addTo(map);
     } else {
       loadAsset(assetKey[a], a, map);
@@ -130,5 +139,3 @@ var loadAssets = (function () {
     loadAsset(value, id);
   });
 })();
-
-module.exports = { enter, exit, preload };
