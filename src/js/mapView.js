@@ -12,92 +12,109 @@ var mapAssets = {};
 var pastBounds = null;
 
 module.exports = class MapView extends View {
-  constructor() {
+  constructor(map) {
     super();
+    this.map = map;
   }
 
-  enter(slide, map) {
+  enter(slide) {
     super.enter(slide);
+    var map = this.map;
+
+    mapElement.classList.add("active");
+    mapElement.classList.remove("exiting");
     var currLayer = mapKey[slide.id];
-    var assets = currLayer.assets
-      ? currLayer.assets.split(",").map(d => d.trim())
-      : [];
+    var assets = getLayerVals(currLayer, "assets");
+    var labels = getLayerVals(currLayer, "label_ids");
 
     // Remove old layers if layer isn't in new map
     var keepAssets = [];
     map.eachLayer(function (layer) {
       var id = layer.options.id;
-      if (!id || id == "baseLayer" || assets.includes(id)) {
+      if (
+        !id ||
+        id == "baseLayer" ||
+        assets.includes(id) ||
+        labels.includes(id)
+      ) {
         keepAssets.push(id);
         return;
       }
       map.removeLayer(layer);
     });
     assets = assets.filter(k => !keepAssets.includes(k));
+    labels = labels.filter(k => !keepAssets.includes(k));
 
     var bounds = getBounds(currLayer);
     if (!bounds.equals(pastBounds)) {
       map.flyToBounds(bounds, {
-        animate: currLayer.duration > 0,
+        animate: true,
         duration: currLayer.duration,
+        noMoveStart: true,
+        easeLinearity: 0,
+        speed: 0.2, // make the flying slow
+        curve: 1, // change the speed at which it zooms out
       });
       pastBounds = bounds;
     }
 
     // Add new layers onto slide.
     addAssets(map, assets);
-    addMarkers(map, currLayer, bounds);
-    return mapElement;
+    addMarkers(map, labels, bounds);
   }
 
   exit(slide) {
-
     super.exit(slide);
-    // mapElement.classList.add("exiting");
-    // mapElement.classList.remove("active");
-    // setTimeout(() => mapElement.classList.remove("exiting"), 1000);
+    mapElement.classList.add("exiting");
+    mapElement.classList.remove("active");
+    setTimeout(() => mapElement.classList.remove("exiting"), 1000);
   }
+
+  preload = async function (slide, preZoom) {
+    var layer = mapKey[slide.id];
+    var assets = getLayerVals(layer, 'assets');
+    assets.forEach(function (a) {
+      if (!mapAssets[a]) {
+        loadAsset(assetKey[a], a);
+      }
+    });
+    if (preZoom) {
+      this.map.fitBounds(getBounds(layer));
+    }
+  };
 };
 
-var addMarkers = function (map, layer, bounds) {
-  if (layer.label_ids) {
-    layer.label_ids.split(",").forEach(function (a) {
-      var label = labelKey[a.trim()];
-      if (!label) return;
-      var [lat, lon] = label.lat_long.split(",").map(b => Number(b));
-      if (!bounds.contains(L.latLng([lat, lon])) && label.alt_lat_long) {
-        [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
-      }
-      var marker = new L.Marker([lat, lon], {
-        id: a.trim(),
-        icon: new L.DivIcon({
-          className: label.classNames.split(",").join(" "),
-          html: `<span>${label.label}</span>`,
-          iconSize: label.classNames.includes("highway") ? [20, 20] : [150, 20],
-        }),
-      }).addTo(map);
-    });
-  }
+var addMarkers = function (map, labels, bounds) {
+  labels.forEach(function (a) {
+    var label = labelKey[a];
+    if (!label) return;
+    var [lat, lon] = label.lat_long.split(",").map(b => Number(b));
+    if (!bounds.contains(L.latLng([lat, lon])) && label.alt_lat_long) {
+      [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
+    }
+
+    var marker = new L.Marker([lat, lon], {
+      id: a,
+      icon: new L.DivIcon({
+        className: label.classNames.split(",").join(" "),
+        html: `<span>${label.label}</span>`,
+        iconSize: (function () {
+          return label.classNames.includes("highway") ? [20, 20] : [150, 20];
+        })(),
+      }),
+    }).addTo(map);
+  });
 };
 
 // Add all current assets to the map.
 var addAssets = function (map, assets) {
   assets.forEach(function (a) {
     if (mapAssets[a]) {
-      console.log(a, mapAssets[a]);
       mapAssets[a].addTo(map);
     } else {
       loadAsset(assetKey[a], a, map);
     }
   });
-};
-
-var preload = async function (slide, preZoom, map) {
-  //TODO: preload asset
-  if (preZoom) {
-    var currLayer = mapKey[slide.id];
-    map.fitBounds(getBounds(currLayer), currLayer.zoomLevel);
-  }
 };
 
 // Get lat/long bounds to zoom to.
@@ -132,10 +149,6 @@ var loadAsset = function (value, id, opt_map) {
   });
 };
 
-// Attempt at loading all assets on page load in the background.
-var loadAssets = (function () {
-  Object.entries(assetKey).forEach(function (a) {
-    var [id, value] = a;
-    loadAsset(value, id);
-  });
-})();
+var getLayerVals = function (layer, prop) {
+  return layer[prop] ? layer[prop].split(",").map(d => d.trim()) : [];
+};

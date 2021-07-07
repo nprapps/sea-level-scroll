@@ -67,7 +67,7 @@ var activateSlide = function (slide) {
     if (!neighbor) return;
     var nextType = neighbor.dataset.type || 'image';
     var neighborHandler = handlers[nextType];
-    neighborHandler.preload(neighbor, handler != neighborHandler && Math.abs(offset) == 1, map);
+    neighborHandler.preload(neighbor, handler != neighborHandler && offset == 1, map);
   });
 };
 
