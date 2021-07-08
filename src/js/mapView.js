@@ -74,13 +74,9 @@ module.exports = class MapView extends View {
     var layer = mapKey[slide.id];
     var assets = getLayerVals(layer, 'assets');
     assets.forEach(function (a) {
-      if (!mapAssets[a]) {
-        loadAsset(assetKey[a], a);
-      }
+      if (!mapAssets[a]) loadAsset(assetKey[a], a);
     });
-    if (preZoom) {
-      this.map.fitBounds(getBounds(layer));
-    }
+    if (preZoom) this.map.fitBounds(getBounds(layer));
   };
 };
 
@@ -92,10 +88,6 @@ var addMarkers = function (map, labels, bounds) {
     if (isMobile && label.mobile_lat_long) {
       [lat, lon] = label.mobile_lat_long.split(",").map(a => a.trim());
     }
-
-    // if (!bounds.contains(L.latLng([lat, lon])) && label.alt_lat_long) {
-    //   [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
-    // }
 
     var marker = new L.Marker([lat, lon], {
         id: a.trim(),

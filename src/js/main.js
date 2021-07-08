@@ -35,26 +35,19 @@ var handlers = {
 };
 
 var active;
-var exiting;
 var activateSlide = function (slide) {
+  if (slide == active) return;
+
   // If we changed block type, let the previous director leave
-  if (slide == active) {
-    if (slide.dataset.type == "longText") {
-      handler.enter(slide, map);
-    }
-    return;
-  };
-  var currType = slide.dataset.type || 'image';
   if (handler) {
     handler.exit(active);
   }
 
+  var currType = slide.dataset.type || 'image';
   handler = handlers[currType];
+  handler.enter(slide);
 
-  exiting = active;
   active = slide;
-  
-  handler.enter(slide, map);
 
   // Lazy-load neighboring slides
   var neighbors = [-1, 0, 1, 2];
@@ -65,7 +58,7 @@ var activateSlide = function (slide) {
     if (!neighbor) return;
     var nextType = neighbor.dataset.type || 'image';
     var neighborHandler = handlers[nextType];
-    neighborHandler.preload(neighbor, handler != neighborHandler && offset == 1, map);
+    neighborHandler.preload(neighbor, handler != neighborHandler && offset == 1);
   });
 };
 
