@@ -42,7 +42,7 @@ path {
 }
 
 .parcels {
-  stroke-width: 0.5px;
+  stroke-width: 0px;
   fill-opacity: 0.8;
   // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
   stroke: #fff;
@@ -73,16 +73,18 @@ path {
 // Marker styles
 .water-label,
 .place-label {
+  .gotham();  
+
   font-weight: 500;
   line-height: 17px;
   height: 17px;
   font-size: 14px;
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: #ddd;
   top: 1.1px;
   position: relative;
   text-anchor: center;
-  text-shadow: 0 0 5px rgba(0, 0, 0);
+  // text-shadow: 0 0 5px rgba(0, 0, 0);
 
   @media @mobile {
     line-height: 15px;
@@ -90,6 +92,17 @@ path {
     font-size: 12px;
   }
 }
+
+.place-label {
+  font-size: 15px;
+  color: #aaa;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
 
 .water-label {
   text-shadow: 0 0 2px #000;
@@ -119,9 +132,15 @@ text.curve {
 
   font-size: 110px;
   fill: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0);
   // letter-spacing: 2px;
 }
 
 .facebook > svg > text.curve {
   font-size: 80px !important;
+}
+
+.roads {
+  stroke: #999;
+  stroke-opacity:0.5;
 }

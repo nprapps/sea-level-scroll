@@ -86,6 +86,7 @@ var addMarkers = function (map, labels, bounds) {
     if (!label) return;
     var [lat, lon] = label.lat_long.split(",").map(b => Number(b));
     if (isMobile && label.mobile_lat_long) {
+      if (label.mobile_lat_long == "hide") return;
       [lat, lon] = label.mobile_lat_long.split(",").map(a => a.trim());
     }
 
