@@ -20,29 +20,7 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
     style="z-index:-1"
       >
     </div>
-      <header class="splash image slide">
-        <video autoplay muted loop id="myVideo" class="backdrop" src="./assets/synced/scratch/water_road.mov">
-        </video>
-        <div class="darken">
-          <div class="chatter">
-            <img class="logo" src="./assets/logo-outline.svg" alt="NPR">
-            <h1><%= doc.intro.headline %></h1>
-            <%= t.renderMarkdown(doc.intro.chatter) %>
-            <div class="bylines">
-              <%= doc.intro.bylines %> | Published <%= doc.intro.published %>
-            </div>
-          </div>
-
-          <div class="scroll-bug" aria-hidden="true">
-            scroll
-            <svg viewBox="0 0 50 50" width="50" height="25">
-              <path
-                d="M 0,0 L 25,25 50,0"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </header>
+      <%= t.include("_header.html", {doc}) %>
       <%
         doc.sequence.forEach(function(slide) {
           if (slide.type == "skip") return;
@@ -133,6 +111,4 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
     <%= t.include("partials/_analytics.html") %>
 
   </body>
-</html>
-
 </html>

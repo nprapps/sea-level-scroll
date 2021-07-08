@@ -1,11 +1,9 @@
 var $ = require("./lib/qsa");
 require("./lib/edgeBuffer");
 var track = require("./lib/tracking");
-var mapHandler = require("./mapView");
-var imageHandler = require("./imageView");
-var videoView = require("./videoView");
+var mapView = require("./mapView");
+var imageView = require("./imageView");
 var textView = require("./textView");
-// var mapToImageView = require("./mapToImageView");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -29,12 +27,11 @@ var completion = 0;
 var handler;
 
 var handlers = {
-  map: new mapHandler(map),
-  image: new imageHandler(),
-  video: new videoView(),
+  map: new mapView(map),
+  image: new imageView(),
+  video: new imageView(),
   text: new textView(),
-  multiple: new imageHandler(),
-  // mapToImage: new mapToImageView(),
+  multiple: new imageView(),
 };
 
 var active;
