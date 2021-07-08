@@ -92,8 +92,8 @@ path {
 }
 
 .water-label {
-  text-shadow: 0 0 2px rgba(255, 255, 255);
-  color: #333;
+  text-shadow: 0 0 2px #000;
+  color: #999;
   font-family: "Georgia", serif;
   font-style: italic;
   text-align: center;
@@ -111,18 +111,17 @@ path {
   text-align: center;
   line-height: 22px;
   font-size: 10px;
+
 }
 
 text.curve {  
-  font-size: 120px;
-  text-align: center;
-  fill: rgb(255, 255, 255);
-  top: 1.1px;
-  position: relative;
-  text-anchor: center;
-  text-shadow: 0 0 5px rgba(0, 0, 0);
+  .gotham();
+
+  font-size: 110px;
+  fill: #fff;
+  // letter-spacing: 2px;
 }
 
-.facbeook text.curve {
-  font-size: 80px;
+.facebook > svg > text.curve {
+  font-size: 80px !important;
 }

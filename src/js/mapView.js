@@ -89,9 +89,13 @@ var addMarkers = function (map, labels, bounds) {
     var label = labelKey[a];
     if (!label) return;
     var [lat, lon] = label.lat_long.split(",").map(b => Number(b));
-    if (!bounds.contains(L.latLng([lat, lon])) && label.alt_lat_long) {
-      [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
+    if (isMobile && label.mobile_lat_long) {
+      [lat, lon] = label.mobile_lat_long.split(",").map(a => a.trim());
     }
+
+    // if (!bounds.contains(L.latLng([lat, lon])) && label.alt_lat_long) {
+    //   [lat, lon] = label.alt_lat_long.split(",").map(a => a.trim());
+    // }
 
     var marker = new L.Marker([lat, lon], {
         id: a.trim(),
@@ -116,15 +120,7 @@ var addMarkers = function (map, labels, bounds) {
               return `<span>${label.label}</span>`;
             }
           }(),
-          iconSize: function() {
-            if (label.classNames.includes("highway")) {
-              return [20, 20]
-            } else if ( label.classNames.includes("water")) {
-              return [-1, 20]
-            } else {
-              return [150, 20]
-            }
-          }()
+          iconSize: [label.label_width,20]
         }),
       }).addTo(map);
   });
