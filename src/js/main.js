@@ -33,6 +33,7 @@ var handlers = {
   image: new imageHandler(),
   video: new videoView(),
   text: new textView(),
+  multiple: new imageHandler(),
   // mapToImage: new mapToImageView(),
 };
 

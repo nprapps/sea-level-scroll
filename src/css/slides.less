@@ -107,7 +107,7 @@
     clear: both;
     font-size: 17px;
     padding: 24px;
-    background: fade(#222, 90%);
+    background: rgba(3, 16, 18, .9);
     color: #eee;
     .gotham();
     box-shadow: 0 24px 8px -8px fade(black, 20%);
@@ -220,20 +220,19 @@
 
   &.exiting {
     animation-name: fade-out;
-    animation-duration: .2s;
+    animation-duration: .4s;
     opacity: 0;
   }
 }
 
-section.standalone {
+section.text {
   box-shadow: 0 0 18px -18px fade(black, 20%);
   .content {
-    background-color: #fff;
     .gotham();
     padding: 10vh 0;
     font-weight: 400;
     font-size: 15px;
-    color: #333;
+    background: rgba(6, 33, 36, .4);
 
     p {
       width: 60%;
@@ -246,7 +245,7 @@ section.standalone {
   }
 }
 
-section.standalone + section.active {
+section.text + section.active {
   display: inline;
   &:after {
     content: "";
@@ -259,6 +258,37 @@ section.standalone + section.active {
       position: sticky;
       top: 0;
     }
+  }
+}
+
+.slide.multiple-image {
+  .image-container {
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 8px;
+    padding: 8px;
+
+    @media @portrait {
+      grid-auto-flow: row;
+      grid-template-columns: 1fr !important;
+
+      &[data-count="3"] {
+        grid-template-rows: repeat(3, 1fr);
+      }
+    }
+
+    img {
+      min-width: 0;
+      min-height: 0;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &.active .image-container {
+    opacity: 1;
   }
 }
 
