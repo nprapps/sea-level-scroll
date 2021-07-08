@@ -94,15 +94,39 @@ var addMarkers = function (map, labels, bounds) {
     }
 
     var marker = new L.Marker([lat, lon], {
-      id: a,
-      icon: new L.DivIcon({
-        className: label.classNames.split(",").join(" "),
-        html: `<span>${label.label}</span>`,
-        iconSize: (function () {
-          return label.classNames.includes("highway") ? [20, 20] : [150, 20];
-        })(),
-      }),
-    }).addTo(map);
+        id: a.trim(),
+        icon: new L.DivIcon({
+          className: label.classNames.split(",").join(" "),
+          html: function(){            
+            if (label.classNames.includes("company")) {
+              return `
+              <svg viewBox="0 0 600 600">\
+                <path fill="transparent" id="curve" d=\
+                      "M100,150 C200,100 400,100 500,150" />\
+                <text class="curve" width="300">\
+                  <textPath xlink:href="#curve">\
+                    ${label.label} \
+                  </textPath>\
+                </text>\
+              </svg>\
+            `
+            }
+            
+            else {
+              return `<span>${label.label}</span>`;
+            }
+          }(),
+          iconSize: function() {
+            if (label.classNames.includes("highway")) {
+              return [20, 20]
+            } else if ( label.classNames.includes("water")) {
+              return [-1, 20]
+            } else {
+              return [150, 20]
+            }
+          }()
+        }),
+      }).addTo(map);
   });
 };
 

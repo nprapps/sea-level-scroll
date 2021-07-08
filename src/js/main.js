@@ -81,6 +81,7 @@ var onScroll = function () {
         completion = complete;
         track("completion", completion + "%");
       }
+      console.log(`slide ${slides.length-1-i}, id: ${slide.id}`) 
       return activateSlide(slide);
     }
   }

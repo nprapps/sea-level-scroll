@@ -44,7 +44,7 @@ path {
 .parcels {
   stroke-width: 0.5px;
   fill-opacity: 0.8;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
+  // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
   stroke: #fff;
 
   &.google {
@@ -94,6 +94,10 @@ path {
 .water-label {
   text-shadow: 0 0 2px rgba(255, 255, 255);
   color: #333;
+  font-family: "Georgia", serif;
+  font-style: italic;
+  text-align: center;
+  width: unset; 
 }
 
 .leaflet-marker-icon {
@@ -107,4 +111,18 @@ path {
   text-align: center;
   line-height: 22px;
   font-size: 10px;
+}
+
+text.curve {  
+  font-size: 120px;
+  text-align: center;
+  fill: rgb(255, 255, 255);
+  top: 1.1px;
+  position: relative;
+  text-anchor: center;
+  text-shadow: 0 0 5px rgba(0, 0, 0);
+}
+
+.facbeook text.curve {
+  font-size: 80px;
 }
