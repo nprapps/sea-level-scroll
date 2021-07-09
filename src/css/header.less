@@ -1,4 +1,4 @@
-// @textShadow: 0 0 8px darken(#333, 0.2);
+@textShadow: 0 0 8px darken(#111, 0.35);
 
 header.splash {
   height: 200vh;
@@ -29,11 +29,9 @@ header.splash {
     justify-content: space-around;
     width: 100%;
     overflow: auto;
-    // background: rgba(34, 34, 34, 0.6);
-    // background-color: rgba(0,0,0,0.5);
     background-image: linear-gradient(
       to bottom,
-      fade(black, 30%) calc(~"100% - 300px"),
+      fade(black, 40%) calc(~"100% - 300px"),
       transparent
     );
     padding-bottom: 100px;
@@ -65,7 +63,7 @@ header.splash {
     font-size: 17px;
     line-height: 1.6;
     padding: 26px;
-    // text-shadow: @textShadow;
+    text-shadow: @textShadow;
     margin-top: 40px;
 
     @media @mobile {
