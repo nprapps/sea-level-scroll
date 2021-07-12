@@ -147,7 +147,7 @@ var getBounds = function (layer) {
 
 // Async fetch assets.
 var fetchAsset = async function (asset) {
-  var response = await fetch(`../assets/synced/${asset}`);
+  var response = await fetch(`./assets/synced/${asset}`);
   var json = await response.json();
   return json;
 };
@@ -157,7 +157,7 @@ var loadAsset = function (value, id, opt_map) {
   if (!value.path) return;
   var styles = { className: value.classNames.split(",").join("") };
   fetchAsset(value.path).then(function (d) {
-    mapAssets[id] = L.geoJSON(d, { id: id, style: styles });
+    mapAssets[id] = L.geoJSON(d, { id: id, style: styles, smoothFactor:0});
     if (opt_map) mapAssets[id].addTo(opt_map);
   });
 };
