@@ -1,24 +1,24 @@
 @import "values";
 
-@keyframes fadeIn {
+@keyframes grow-in-50 {
   from {
-    //transform: scaleX(0.3);
-    //transform: scaleY(0.3);
     fill-opacity: 0;
+    stroke-opacity: 0;
   }
   to {
-    //transform: scaleX(1);
-    //transform: scaleY(1);
-    fill-opacity: 0.7;
+    fill-opacity: 0.5;
+    stroke-opacity: 1;
   }
 }
 
-@keyframes fadeOut {
+@keyframes grow-in-diff {
   from {
-    fill-opacity: 0.7;
+    fill-opacity: 0;
+    stroke-opacity: 0;
   }
   to {
-    fill-opacity: 0;
+    fill-opacity: 0.7;
+    stroke-opacity: 1;
   }
 }
 
@@ -28,13 +28,20 @@ path {
     stroke: #ddd;
     stroke-opacity: 1;
 
+    // Will replace these
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-play-state: inherit;
+
     &.flood-50 {
       filter: url(#filter-wave-50);
+      animation-name: grow-in-50;
       fill-opacity: 0.5;
     }
 
     &.flood-diff {
       filter: url(#filter-wave-diff);
+      animation-name: grow-in-diff;
       fill-opacity: 0.7;
     }
   }

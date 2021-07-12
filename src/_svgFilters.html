@@ -10,10 +10,10 @@
           result="DILATED"
         />
         <feImage
-          xlink:href="/assets/synced/images/water.jpeg"
+          xlink:href="/assets/synced/images/water-50.jpeg"
           result="IMAGE"
-          width="1178"
-          height="899"
+          width="400"
+          height="300"
         />
         <feTile in="IMAGE" result="TILE" />
         <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
@@ -30,7 +30,7 @@
         <!-- Create turbulence -->
         <feTurbulence
           id="turbulence"
-          numOctaves="3"
+          numOctaves="1"
           seed="2"
           baseFrequency="0.02 0.05"
           stitchTiles="stitch"
@@ -66,8 +66,8 @@
         <feImage
           xlink:href="/assets/synced/images/water.jpeg"
           result="IMAGE"
-          width="1178"
-          height="899"
+          width="400"
+          height="300"
         />
         <feTile in="IMAGE" result="TILE" />
         <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
@@ -84,7 +84,7 @@
         <!-- Create turbulence -->
         <feTurbulence
           id="turbulence"
-          numOctaves="3"
+          numOctaves="1"
           seed="2"
           baseFrequency="0.02 0.05"
           stitchTiles="stitch"
