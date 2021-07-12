@@ -43,7 +43,7 @@ path {
 
 
 .parcels {
-  stroke-width: 1px;
+  stroke-width: 0.5px;
   fill-opacity: 0.5;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
   stroke: #fff;
@@ -51,6 +51,7 @@ path {
   &.faded {
     fill-opacity:0.5;
     filter: none;
+    // stroke: none;
   }
 
   &.google {
@@ -60,6 +61,12 @@ path {
   &.fb {
     fill: @facebook;
   }
+}
+
+.buildings {
+  stroke-width:0.5px;
+  stroke: #fff;
+  fill-opacity:1;
 }
 
 .east-palo-alto {
