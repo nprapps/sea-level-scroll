@@ -123,7 +123,8 @@ module.exports = function(grunt) {
             Key: path.join(remoteSynced, item.file),
             Body: buffer,
             ContentType: mime.getType(item.file),
-            CacheControl: "public,max-age=300"
+            CacheControl: "public,max-age=300",
+            ACL: "public-read"
           };
           if (target == "live") {
             obj.ACL = "public-read";
