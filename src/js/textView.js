@@ -10,7 +10,7 @@ module.exports = class TextView extends View {
 
   enter(slide) {
     super.enter(slide);
-    mapElement.classList.add("exiting");
+    mapElement.classList.remove("exiting");
     mapElement.classList.remove("active");
   }
 }

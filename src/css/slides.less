@@ -144,12 +144,7 @@
 
   .caption {
     font-size: 80%;
-    padding-top: 20px;
     font-style: italic;
-
-    @media @mobile {
-      padding-top: 10px;
-    }
   }
 
   &.image,
@@ -252,7 +247,7 @@ section.text {
       }
 
       div {
-        max-width: 100%;
+        max-width: 600px;
       }
 
       span {
@@ -267,7 +262,7 @@ section.text {
         grid-gap: 8px;
         padding: 8px;
 
-        img {
+        img, video {
           min-width: 0;
           min-height: 0;
           max-height: 100%;
@@ -321,7 +316,7 @@ section.text + section.active {
       }
     }
 
-    img {
+    img, video {
       min-width: 0;
       min-height: 0;
       max-height: 100%;
