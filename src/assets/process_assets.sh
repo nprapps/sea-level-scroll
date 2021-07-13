@@ -58,6 +58,15 @@ for img in images/*.png; do
       ../synced/$img;
   fi
 done
+for img in images/*.jpeg; do
+  echo "Processing $img..."
+  if [ ! -f "../synced/$img" ]; then
+    magick convert $img -resize 1200x800\> \
+      -define png:compression-filter=5 \
+      -define png:compression-level=9 \
+      ../synced/$img;
+  fi
+done
 
 # exit back to assets
 cd ..
