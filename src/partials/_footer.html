@@ -1,13 +1,89 @@
-<footer role="contentinfo">
-  <div class="constrained">
-    <%= typeof content != "undefined" ? content : "" %>
-    <div class="npr">
+<footer class="closing">
+  <div class="more-stories">
+    <div class="constrained">
+      <h3><%= renderMarkdownText(doc.footer.outboundTitle) %></h3>
+      <div class="chatter"><%= t.renderMarkdown(doc.footer.text) %></div>
+
+      <ul class="outbound">
+        <% doc.footer.outbound.forEach(function(link) { %>
+        <li>
+          <% if (link.embargo) { %>
+          <a>
+            <img
+              src="./assets/synced/thumbnails/<%= link.thumbnail %>"
+              alt=""
+            />
+            <span class="embargo"><%= link.embargo %></span>
+            <%= renderMarkdownText(link.title) %>
+          </a>
+          <% } else { %>
+          <a href="<%= link.url %>">
+            <img
+              src="./assets/synced/thumbnails/<%= link.thumbnail %>"
+              alt=""
+            />
+            <%= renderMarkdownText(link.title) %>
+          </a>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="about">
+    <div class="constrained">
+      <div class="side-by-side">
+        <div class="block">
+          <h4><%= doc.footer.digitalCreditHeadline %></h4>
+          <ul class="credits">
+            <% doc.footer.digitalCredits.forEach(function(credit) { %>
+            <li><%= credit %></li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <div class="block">
+          <h4><%= doc.footer.additionalCreditHeadline %></h4>
+          <%= t.renderMarkdown(doc.footer.additionalCredits) %>
+
+          <h4><%= doc.footer.dataCreditHeadline %></h4>
+          <ul class="credits">
+            <% doc.footer.dataSources.forEach(function(credit) { %>
+            <li><%= t.renderMarkdown(credit) %></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="npr">
+    <div class="constrained">
       <ul>
-        <li><a href="https://www.npr.org/about-npr/179876898/terms-of-use" target="_blank">Terms of Use</a></li>
-        <li><a href="https://www.npr.org/about-npr/179878450/privacy-policy" target="_blank">Privacy</a></li>
-        <li><a href="https://www.npr.org/about-npr/179878450/privacy-policy#yourchoices" target="_blank">Your Privacy Choices</a></li>
+        <li>
+          <a
+            href="https://www.npr.org/about-npr/179876898/terms-of-use"
+            target="_blank"
+            >Terms of Use</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.npr.org/about-npr/179878450/privacy-policy"
+            target="_blank"
+            >Privacy</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.npr.org/about-npr/179878450/privacy-policy#yourchoices"
+            target="_blank"
+            >Your Privacy Choices</a
+          >
+        </li>
         <li><a href="https://text.npr.org/" target="_blank">Text Only</a></li>
-        <li>&copy; 2021 NPR</li>
+        <li>&copy; 2020 NPR</li>
       </ul>
     </div>
   </div>

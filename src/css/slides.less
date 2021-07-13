@@ -55,7 +55,8 @@
     animation: none;
   }
 
-  .watermark, .inset {
+  .watermark,
+  .inset {
     position: fixed;
     bottom: 0;
     display: none;
@@ -103,7 +104,8 @@
       opacity: 1;
     }
 
-    .watermark, .inset {
+    .watermark,
+    .inset {
       display: block;
     }
   }
@@ -238,14 +240,18 @@ section.text {
       vertical-align: baseline;
     }
 
-    p,
     div,
+    p,
     h2 {
       max-width: 600px;
       margin: 20px auto;
 
       &.full-width {
-        max-width: 1250px;
+        max-width: 1024px;
+
+        div {
+          max-width: 500px;
+        }
       }
 
       span {
