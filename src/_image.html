@@ -11,5 +11,8 @@
   <% if (slide.inset) { %>
   <img class="inset" src="./assets/synced/<%= slide.inset%>" alt="">
   <% } %>
+  <% if (slide.credit) { %>
+  <span class="watermark" alt=""><%=slide.credit%></span>
+  <% } %>
   <%= t.include("partials/_text.html", { slide }) %>
 </section>
