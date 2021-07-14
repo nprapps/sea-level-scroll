@@ -1,7 +1,7 @@
 <div id="svg-filters">
   <svg>
     <defs>
-      <filter id="filter-wave-50" x="0" y="0" width="100%" height="100%">
+      <filter id="filter-wave-50-1" x="0" y="0" width="100%" height="100%">
         <!-- Expand the path -->
         <feMorphology
           operator="dilate"
@@ -10,10 +10,10 @@
           result="DILATED"
         />
         <feImage
-          xlink:href="/assets/synced/images/water-50.jpeg"
+          xlink:href="/assets/synced/images/water-2.jpeg"
           result="IMAGE"
-          width="400"
-          height="300"
+          width="256"
+          height="256"
         />
         <feTile in="IMAGE" result="TILE" />
         <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
@@ -32,17 +32,17 @@
           id="turbulence"
           numOctaves="1"
           seed="2"
-          baseFrequency="0.02 0.05"
+          baseFrequency="0.02 0.06"
           stitchTiles="stitch"
           result="NOISE"
         >
-          <animate
+          <!-- <animate
             attributeName="baseFrequency"
             dur="60s"
             keyTimes="0;0.5;1"
             values="0.02 0.06;0.04 0.08;0.02 0.06"
             repeatCount="indefinite"
-          />
+          /> -->
         </feTurbulence>
         <feDisplacementMap
           scale="20"
@@ -55,7 +55,7 @@
         <feComposite operator="in" in="TURBULENCE" in2="SourceGraphic" />
       </filter>
 
-      <filter id="filter-wave-diff" x="0" y="0" width="100%" height="100%">
+      <filter id="filter-wave-50-2" x="0" y="0" width="100%" height="100%">
         <!-- Expand the path -->
         <feMorphology
           operator="dilate"
@@ -64,10 +64,55 @@
           result="DILATED"
         />
         <feImage
-          xlink:href="/assets/synced/images/water.jpeg"
+          xlink:href="/assets/synced/images/water-2.jpeg"
           result="IMAGE"
-          width="400"
-          height="300"
+          width="256"
+          height="256"
+        />
+        <feTile in="IMAGE" result="TILE" />
+        <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
+        <feColorMatrix
+          type="matrix"
+          values="0.3  0  0    0  0
+                  0    1  0    0  0
+                  0    0  0.6  0  0
+                  0    0  0    1  0"
+          in="COMPOSITE"
+          result="BACKDROP"
+        />
+
+        <!-- Create turbulence -->
+        <feTurbulence
+          id="turbulence"
+          numOctaves="1"
+          seed="2"
+          baseFrequency="0.04 0.08"
+          stitchTiles="stitch"
+          result="NOISE"
+        />
+        <feDisplacementMap
+          scale="20"
+          in="BACKDROP"
+          in2="NOISE"
+          result="TURBULENCE"
+        />
+
+        <!-- Finally, crop expanded, turbulated path back to original size to remove edge noise -->
+        <feComposite operator="in" in="TURBULENCE" in2="SourceGraphic" />
+      </filter>
+
+      <filter id="filter-wave-diff-1" x="0" y="0" width="100%" height="100%">
+        <feMorphology
+          operator="dilate"
+          radius="20"
+          in="SourceAlpha"
+          result="DILATED"
+        />
+        <feImage
+          xlink:href="/assets/synced/images/water-2.jpeg"
+          result="IMAGE"
+          width="256"
+          height="256"
         />
         <feTile in="IMAGE" result="TILE" />
         <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
@@ -81,7 +126,6 @@
           result="BACKDROP"
         />
 
-        <!-- Create turbulence -->
         <feTurbulence
           id="turbulence"
           numOctaves="1"
@@ -89,15 +133,7 @@
           baseFrequency="0.02 0.05"
           stitchTiles="stitch"
           result="NOISE"
-        >
-          <animate
-            attributeName="baseFrequency"
-            dur="60s"
-            keyTimes="0;0.5;1"
-            values="0.02 0.06;0.04 0.08;0.02 0.06"
-            repeatCount="indefinite"
-          />
-        </feTurbulence>
+        />
         <feDisplacementMap
           scale="20"
           in="BACKDROP"
@@ -105,7 +141,49 @@
           result="TURBULENCE"
         />
 
-        <!-- Finally, crop expanded, turbulated path back to original size to remove edge noise -->
+        <feComposite operator="in" in="TURBULENCE" in2="SourceGraphic" />
+      </filter>
+
+      <filter id="filter-wave-diff-2" x="0" y="0" width="100%" height="100%">
+        <feMorphology
+          operator="dilate"
+          radius="20"
+          in="SourceAlpha"
+          result="DILATED"
+        />
+        <feImage
+          xlink:href="/assets/synced/images/water-2.jpeg"
+          result="IMAGE"
+          width="256"
+          height="256"
+        />
+        <feTile in="IMAGE" result="TILE" />
+        <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
+        <feColorMatrix
+          type="matrix"
+          values="0.5  0  0    0  0
+                  0    1  0    0  0
+                  0    0  0.8  0  0
+                  0    0  0    1  0"
+          in="COMPOSITE"
+          result="BACKDROP"
+        />
+
+        <feTurbulence
+          id="turbulence"
+          numOctaves="1"
+          seed="2"
+          baseFrequency="0.02 0.05"
+          stitchTiles="stitch"
+          result="NOISE"
+        />
+        <feDisplacementMap
+          scale="20"
+          in="BACKDROP"
+          in2="NOISE"
+          result="TURBULENCE"
+        />
+
         <feComposite operator="in" in="TURBULENCE" in2="SourceGraphic" />
       </filter>
     </defs>

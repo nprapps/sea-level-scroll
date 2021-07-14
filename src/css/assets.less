@@ -22,6 +22,24 @@
   }
 }
 
+@keyframes wave-50-effect {
+  from {
+    filter: url(#filter-wave-50-1);
+  }
+  to {
+    filter: url(#filter-wave-50-2);
+  }
+}
+
+@keyframes wave-diff-effect {
+  from {
+    filter: url(#filter-wave-diff-1);
+  }
+  to {
+    filter: url(#filter-wave-diff-2);
+  }
+}
+
 path {
   &.flood {
     stroke-width: 2px;
@@ -29,19 +47,22 @@ path {
     stroke-opacity: 1;
 
     // Will replace these
-    animation-duration: 3s;
-    animation-timing-function: linear;
-    animation-play-state: inherit;
+    // animation-duration: 3s;
+    // animation-timing-function: linear;
+    // animation-play-state: inherit;
+
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 
     &.flood-50 {
-      filter: url(#filter-wave-50);
-      animation-name: grow-in-50;
+      animation-name: wave-50-effect;
+      //animation-name: grow-in-50;
       fill-opacity: 0.5;
     }
 
     &.flood-diff {
-      filter: url(#filter-wave-diff);
-      animation-name: grow-in-diff;
+      animation-name: wave-diff-effect;
+      //animation-name: grow-in-diff;
       fill-opacity: 0.7;
     }
   }
