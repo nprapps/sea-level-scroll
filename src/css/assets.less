@@ -59,7 +59,7 @@ path {
     stroke: #fff;
 
     &.faded {
-      fill-opacity: 0.5;
+      fill-opacity: 0.2;
       filter: none;
     }
 
@@ -70,26 +70,27 @@ path {
     &.fb {
       fill: @facebook;
     }
-  }
+  }  
 
   &.buildings {
     stroke-width: 0.5px;
     stroke: #fff;
-    fill-opacity: 1;
+    fill-opacity: 0.2;
+  }
+
+  &.area {
+    stroke: #ccc;
+    stroke-width: 3px;
+    stroke-dasharray: 3px 5px;
+    stroke-linecap: round;
+    fill: none;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   }
 
   &.east-palo-alto {
-    stroke: #fff;
-    stroke-width: 0.5px;
-    fill: #eee;
-    fill-opacity: 0.4;
   }
 
   &.belle-haven {
-    stroke: #aaa;
-    stroke-width: 0.5px;
-    fill: #ccc;
-    fill-opacity: 0.4;
   }
 
   &.roads {
@@ -116,6 +117,10 @@ path {
     color: #ddd;
     top: 1.1px;
 
+    &.special {
+      color: #fff;
+    }
+
     @media @mobile {
       line-height: 15px;
       height: 15px;
@@ -137,6 +142,11 @@ path {
     font-style: italic;
     text-align: center;
     width: unset;
+    font-size: 20px;
+
+    @media @mobile {
+      font-size: 12px;
+    }
   }
 
   .highway-shield {
