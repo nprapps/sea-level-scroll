@@ -6,6 +6,9 @@
   }
   to {
     filter: url(#filter-wave-2);
+  }
+}
+
 // Base map styles
 #base-map {
   z-index: 100;
@@ -70,13 +73,13 @@ path {
     //   //animation-name: grow-in-diff;
     //   fill-opacity: 0.7;
     // }
-    fill: #3a745d;
-    stroke-width: 0.25px;
-    stroke: #fff;
-    fill-opacity: 0.6;
+    // fill: #3a745d;
+    // stroke-width: 0.25px;
+    // stroke: #fff;
+    // fill-opacity: 0.6;
 
-    animation-name: partial-fade-in;
-    animation-duration: 3s;
+    // animation-name: partial-fade-in;
+    // animation-duration: 3s;
   }
 
   &.levee {
@@ -95,7 +98,6 @@ path {
 
     &.faded {
       fill-opacity: 0.2;
-      
     }
 
     &.no-drop {
@@ -109,7 +111,7 @@ path {
     &.fb {
       fill: @facebook;
     }
-  }  
+  }
 
   &.buildings {
     stroke-width: 0.5px;

@@ -21,6 +21,7 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
       >
     </div>
       <%= t.include("_header.html", {doc}) %>
+      <%= t.include("_svgFilters.html", {doc}) %>
       <%
         doc.sequence.forEach(function(slide) {
           if (slide.type == "skip") return;
