@@ -9,6 +9,9 @@
 @small-above: ~"(min-width: 501px)";
 @small: ~"(max-width: 500px)";
 
+@widescreen: (min-aspect-ratio: 4 / 3);
+@portrait: (max-aspect-ratio: 4 / 3);
+
 /*
  * Fonts
  */
@@ -61,6 +64,9 @@
 @off-black:           #111;
 @black:               #000;
 
+@bay-blue-light:      #c1e3d2;
+@bay-blue-medium:     #8fbda6;
+
 @accent-dark:         #4774CC;
 @accent-light:        #bccae5;
 
@@ -76,8 +82,11 @@
 
 @soft-blue: #8aafeb;
 
-@google: #A23520;
-@facebook: #EFC637;
+@google: #ffd04d;//#4285F4;
+@facebook: #6195ff;
+@levee: #ffd89e;
+
+@textShadow: 0 0 8px darken(#111, 0.45);
 
 /*
  * Mixins
@@ -90,4 +99,33 @@
 .contain-centered() {
   .contain();
   text-align: center;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// weird flex but okay
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes partial-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    fill-opacity: .6;
+    opacity: 1;
+  }
 }

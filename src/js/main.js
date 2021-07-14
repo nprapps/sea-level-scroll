@@ -1,10 +1,9 @@
 var $ = require("./lib/qsa");
 require("./lib/edgeBuffer");
 var track = require("./lib/tracking");
-var mapHandler = require("./mapView");
-var imageHandler = require("./imageView");
-var multImageHandler = require("./multImageView");
-var videoView = require("./videoView");
+var mapView = require("./mapView");
+var imageView = require("./imageView");
+var textView = require("./textView");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -26,42 +25,29 @@ L.tileLayer(
 
 var completion = 0;
 var handler;
+
 var handlers = {
-  map: mapHandler,
-  image: imageHandler,
-  longText: multImageHandler,
-  video: videoView,
+  map: new mapView(map),
+  image: new imageView(),
+  video: new imageView(),
+  text: new textView(),
+  multiple: new imageView(),
 };
 
 var active;
-var exiting;
 var activateSlide = function (slide) {
+  if (slide == active) return;
+
   // If we changed block type, let the previous director leave
-  if (slide == active) {
-    if (slide.dataset.type == "longText") {
-      handler.enter(slide, map);
-    }
-    return;
-  };
+  if (handler) {
+    handler.exit(active);
+  }
+
   var currType = slide.dataset.type || 'image';
-  if (handler && handler != handlers[currType]) {
-    handler.exit();
-  }
-
   handler = handlers[currType];
+  handler.enter(slide);
 
-  exiting = active;
-  slide.classList.add("active");
-  slide.classList.remove("exiting");
   active = slide;
-
-  if (exiting) {
-    exiting.classList.remove("active");
-    exiting.classList.add("exiting");
-    setTimeout(() => exiting.classList.remove("exiting"), 2000);
-  }
-  
-  handler.enter(slide, map);
 
   // Lazy-load neighboring slides
   var neighbors = [-1, 0, 1, 2];
@@ -72,7 +58,7 @@ var activateSlide = function (slide) {
     if (!neighbor) return;
     var nextType = neighbor.dataset.type || 'image';
     var neighborHandler = handlers[nextType];
-    neighborHandler.preload(neighbor, handler != neighborHandler && Math.abs(offset) == 1, map);
+    neighborHandler.preload(neighbor, handler != neighborHandler && offset == 1);
   });
 };
 
@@ -86,6 +72,7 @@ var onScroll = function () {
         completion = complete;
         track("completion", completion + "%");
       }
+      console.log(`slide ${slides.length-1-i}, id: ${slide.id}`) 
       return activateSlide(slide);
     }
   }

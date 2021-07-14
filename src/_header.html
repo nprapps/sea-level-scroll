@@ -1,25 +1,26 @@
-<header class="splash video slide">
-<!--   <img
-    src="./assets/<%= doc.intro.image %>"
+<header class="splash image slide">
+  <video
+    autoplay
+    muted
+    loop
+    id="myVideo"
     class="backdrop"
-    alt=""
-  > -->
-  <video autoplay muted loop id="myVideo" class="backdrop">
-    <source src="./assets/synced/water_road.mp4" type="video/mp4">
-  </video>
+    src="./assets/synced/videos/<%=doc.intro.video%>"
+  ></video>
   <div class="darken">
     <div class="chatter">
-      <img class="logo" src="./assets/logo-outline.svg" alt="NPR">
+      <img class="logo" src="./assets/logo-outline.svg" alt="NPR" />
       <h1><%= doc.intro.headline %></h1>
       <%= t.renderMarkdown(doc.intro.chatter) %>
+      <div class="bylines">
+        <%= doc.intro.bylines %> | Published <%= doc.intro.published %>
+      </div>
     </div>
 
     <div class="scroll-bug" aria-hidden="true">
       scroll
       <svg viewBox="0 0 50 50" width="50" height="25">
-        <path
-          d="M 0,0 L 25,25 50,0"
-        ></path>
+        <path d="M 0,0 L 25,25 50,0"></path>
       </svg>
     </div>
   </div>

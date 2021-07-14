@@ -1,7 +1,7 @@
 <section class="image slide align-<%= slide.align || "right" %> <%= slide.classes %>" id="<%= slide.id %>" data-type="image">
   <img
     class="backdrop"
-    data-src="./assets/synced/<%= slide.image %>"
+    data-src="./assets/synced/images/<%= slide.image %>"
     alt=""
     style="<%= t.style({
       "object-fit": slide.contain ? "contain" : false,
@@ -10,6 +10,9 @@
   >
   <% if (slide.inset) { %>
   <img class="inset" src="./assets/synced/<%= slide.inset%>" alt="">
+  <% } %>
+  <% if (slide.credit) { %>
+  <span class="watermark" alt=""><%=slide.credit%></span>
   <% } %>
   <%= t.include("partials/_text.html", { slide }) %>
 </section>

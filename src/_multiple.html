@@ -1,0 +1,12 @@
+<section class="multiple-image slide align-<%= slide.align || "right" %>" id="<%= slide.id %>">
+  <div
+    class="image-container backdrop"
+    style="<%= t.style({"grid-template-columns": slide.grid }) %>"
+    data-count="<%= slide.image.split(/, */).length %>"
+  >
+    <% slide.image.split(/, */).forEach(function(img) { %>
+      <img src="./assets/synced/<%= img %>" class="item" alt="">
+    <% }); %>
+  </div>
+  <%= t.include("partials/_text.html", { slide }) %>
+</section>

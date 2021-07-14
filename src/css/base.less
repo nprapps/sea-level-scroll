@@ -21,6 +21,8 @@ body {
   font-family: @sans;
   font-size: 14px;
   line-height: 1.4;
+  background: rgba(3, 16, 18, 1);
+  color: @off-white;
 }
 
 img, svg {
@@ -32,6 +34,14 @@ h1 {
   font-size: 20px;
   color: #666;
 }
+
+h2 {
+  .gotham();
+  font-size: 20px;
+  color: @white;
+  text-transform: uppercase;
+}
+
 
 a, a:visited {
   color: @accent-dark;
@@ -55,7 +65,6 @@ img:not([alt]) {
 footer {
   background: black;
   color: white;
-  padding: 40px 20px;
   position: relative;
   z-index: 999;
   justify-content: flex-start;

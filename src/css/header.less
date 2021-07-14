@@ -1,4 +1,4 @@
-// @textShadow: 0 0 8px darken(#333, 0.2);
+@textShadow: 0 0 8px darken(#111, 0.35);
 
 header.splash {
   height: 200vh;
@@ -6,9 +6,9 @@ header.splash {
   background-attachment: fixed;
   background-size: cover;
 
-  // @media @mobile {
-  //   background-attachment: scroll;
-  // }
+  @media @mobile {
+    background-attachment: scroll;
+  }
 
   .background {
     z-index: -1;
@@ -29,11 +29,9 @@ header.splash {
     justify-content: space-around;
     width: 100%;
     overflow: auto;
-    // background: rgba(34, 34, 34, 0.6);
-    // background-color: rgba(0,0,0,0.5);
     background-image: linear-gradient(
       to bottom,
-      fade(black, 30%) calc(~"100% - 300px"),
+      fade(black, 40%) calc(~"100% - 300px"),
       transparent
     );
     padding-bottom: 100px;
@@ -65,7 +63,7 @@ header.splash {
     font-size: 17px;
     line-height: 1.6;
     padding: 26px;
-    // text-shadow: @textShadow;
+    text-shadow: @textShadow;
     margin-top: 40px;
 
     @media @mobile {
@@ -79,15 +77,16 @@ header.splash {
   }
 
   h1 {
-    font-size: 60px;
+    font-size: 40px;
     color: white;
-    line-height: 1.3;
+    line-height: 1.2;
     text-align: center;
     margin: 0;
     padding: 5px 0;
 
     @media @mobile {
       font-size: 30px;
+      line-height: 1.3;
     }
   }
 
@@ -95,14 +94,5 @@ header.splash {
     @media @mobile {
       font-size: 14px;
     }
-  }
-
-  h1,
-  p {
-    // @fade: fade(darken(@sky-blue, 30%), 30%);
-    // background: @fade;
-    // box-shadow: 0 0 32px 32px @fade;
-    // padding: 0 20px;
-    // border-radius: 40px;
   }
 }
