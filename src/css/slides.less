@@ -37,9 +37,10 @@
 
 .wave-break {
   width: 55%;
+  max-width: 450px !important;
   height: 100px;
   // margin-bottom:38px;
-  background: url(../assets/synced/images/wave-05.svg);
+  background: url(../assets/synced/images/wave-06.svg);
   background-repeat: repeat;
   // background-position-x: 0%;
   // background-position-y: 0%;
@@ -114,32 +115,15 @@
     animation: none;
   }
 
-  .watermark,
   .inset {
     position: fixed;
     bottom: 0;
-    display: none;
-    z-index: -1;
-  }
-
-  .inset {
+    left: 0;
     width: 200px;
     max-width: 50%;
+    display: none;
+    z-index: -1;
     border: 3px solid white;
-    left: 0;
-  }
-
-  .watermark {
-    text-shadow: @textShadow;
-    font-style: italic;
-    padding: 5px 10px;
-    right: 0;
-    text-align: right;
-    background: rgba(0, 0, 0, 0.5);
-
-    @media @mobile {
-      font-size: 12px;
-    }
   }
 
   .boot-complete & .backdrop {
@@ -163,7 +147,6 @@
       opacity: 1;
     }
 
-    .watermark,
     .inset {
       display: block;
     }
@@ -189,6 +172,15 @@
     .align-center& {
       float: none;
       margin: 5vh auto 90vh;
+    }
+
+    .city-locator {
+      border: 1px solid white;
+
+      & + p {
+        margin-top: 0;
+        font-size: 80%;
+      }
     }
 
     @media @mobile {
@@ -301,18 +293,14 @@ section.text {
       vertical-align: baseline;
     }
 
-    div,
     p,
+    div,
     h2 {
       max-width: 677px;
       margin: 20px auto;
 
       &.full-width {
-        max-width: 1024px;
-
-        div {
-          max-width: 500px;
-        }
+        max-width: 1250px;
       }
 
       span {
