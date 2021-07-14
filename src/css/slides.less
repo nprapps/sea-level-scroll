@@ -37,9 +37,10 @@ from {
 
 .wave-break {
   width: 55%;
+  max-width: 450px !important;
   height: 100px;
   // margin-bottom:38px;
-  background: url(../assets/synced/images/wave-05.svg);
+  background: url(../assets/synced/images/wave-06.svg);
   background-repeat: repeat;
   // background-position-x: 0%;
   // background-position-y: 0%;
@@ -117,32 +118,15 @@ from {
     animation: none;
   }
 
-  .watermark,
   .inset {
     position: fixed;
     bottom: 0;
-    display: none;
-    z-index: -1;
-  }
-
-  .inset {
+    left: 0;
     width: 200px;
     max-width: 50%;
+    display: none;
+    z-index: -1;
     border: 3px solid white;
-    left: 0;
-  }
-
-  .watermark {
-    text-shadow: @textShadow;
-    font-style: italic;
-    padding: 5px 10px;
-    right: 0;
-    text-align: right;
-    background: rgba(0, 0, 0, 0.5);
-
-    @media @mobile {
-      font-size: 12px;
-    }
   }
 
   .boot-complete & .backdrop {
@@ -166,7 +150,6 @@ from {
       opacity: 1;
     }
 
-    .watermark,
     .inset {
       display: block;
     }
@@ -192,6 +175,15 @@ from {
     .align-center& {
       float: none;
       margin: 5vh auto 90vh;
+    }
+
+    .city-locator {
+      border: 1px solid white;
+
+      & + p {
+        margin-top: 0;
+        font-size: 80%;
+      }
     }
 
     @media @mobile {
@@ -283,10 +275,10 @@ section.text {
   // box-shadow: 0 0 18px -18px fade(black, 20%);
   background: linear-gradient(
     to bottom,
-    transparent,
-    rgba(3, 16, 18, 0.8) 15%,
-    rgba(3, 16, 18, 0.8) 85%,
-    transparent
+    rgba(6, 33, 36, 0),
+    rgba(6, 33, 36, 0.8) 15%,
+    rgba(6, 33, 36, 0.8) 85%,
+    rgba(6, 33, 36, 0)
   );
 
   .content {
@@ -302,18 +294,14 @@ section.text {
       vertical-align: baseline;
     }
 
-    div,
     p,
+    div,
     h2 {
       max-width: 677px;
       margin: 20px auto;
 
       &.full-width {
-        max-width: 1024px;
-
-        div {
-          max-width: 500px;
-        }
+        max-width: 1250px;
       }
 
       span {
