@@ -1,3 +1,5 @@
+var $ = require("./lib/qsa");
+
 module.exports = class View {
   constructor() {}
 
@@ -13,6 +15,10 @@ module.exports = class View {
   }
 
   preload(slide, active) {
-
+    var images = $("[data-src]", slide);
+    images.forEach(function (img) {
+      img.src = img.dataset.src;
+      img.removeAttribute("data-src");
+    });
   }
 };

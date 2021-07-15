@@ -44,22 +44,18 @@
 // Asset path styles
 path {
   &.flood {
-    fill-opacity: 0.7;
+    fill-opacity: 0.5;
     stroke: none;
-
-    animation-duration: 1.75s;
-    animation-iteration-count: infinite;
 
     &.flood-50,
     &.flood-100 {
-      animation-name: wave-effect;
-      // filter: url(#filter-wave-1)
+      animation: wave-effect 1.5s infinite;
     }
 
     &.flood-transparent {
       fill: none;
-      stroke-width: 2px;
-      stroke: #ddd;
+      stroke-width: .75px;
+      stroke: #eee;
     }
   }
 
@@ -173,7 +169,7 @@ path {
   }
 
   .highway-shield {
-    background-image: url(../assets/synced/images/shield.svg);
+    background-image: url(./assets/synced/images/shield.svg);
     background-repeat: no-repeat;
     color: #666;
     text-align: center;
