@@ -37,10 +37,9 @@
 
 .wave-break {
   width: 55%;
-  max-width: 450px !important;
   height: 100px;
   // margin-bottom:38px;
-  background: url(../assets/synced/images/wave-06.svg);
+  background: url(../assets/synced/images/wave-05.svg);
   background-repeat: repeat;
   // background-position-x: 0%;
   // background-position-y: 0%;
@@ -115,15 +114,32 @@
     animation: none;
   }
 
+  .watermark,
   .inset {
     position: fixed;
     bottom: 0;
-    left: 0;
-    width: 200px;
-    max-width: 50%;
     display: none;
     z-index: -1;
+  }
+
+  .inset {
+    width: 200px;
+    max-width: 50%;
     border: 3px solid white;
+    left: 0;
+  }
+
+  .watermark {
+    text-shadow: @textShadow;
+    font-style: italic;
+    padding: 5px 10px;
+    right: 0;
+    text-align: right;
+    background: rgba(0, 0, 0, 0.5);
+
+    @media @mobile {
+      font-size: 12px;
+    }
   }
 
   .boot-complete & .backdrop {
@@ -147,6 +163,7 @@
       opacity: 1;
     }
 
+    .watermark,
     .inset {
       display: block;
     }
@@ -172,15 +189,6 @@
     .align-center& {
       float: none;
       margin: 5vh auto 90vh;
-    }
-
-    .city-locator {
-      border: 1px solid white;
-
-      & + p {
-        margin-top: 0;
-        font-size: 80%;
-      }
     }
 
     @media @mobile {
@@ -275,7 +283,7 @@ section.text {
     transparent,
     rgba(3, 16, 18, 0.4) 5%,
     rgba(3, 16, 18, 0.9) 10%,
-    rgba(3, 16, 18, 0.9) 95%,
+    rgba(3, 16, 18, 0.8) 95%,
     rgba(3, 16, 18, 0.4) 97%,
     transparent
   );
@@ -293,14 +301,18 @@ section.text {
       vertical-align: baseline;
     }
 
-    p,
     div,
+    p,
     h2 {
       max-width: 677px;
       margin: 20px auto;
 
       &.full-width {
-        max-width: 1250px;
+        max-width: 1024px;
+
+        div {
+          max-width: 500px;
+        }
       }
 
       span {

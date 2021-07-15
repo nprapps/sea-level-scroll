@@ -3,38 +3,20 @@
     <defs>
       <filter id="filter-wave-1" x="0" y="0" width="100%" height="100%">
         <!-- Expand the path -->
-        <feMorphology
-          operator="dilate"
-          radius="20"
-          in="SourceAlpha"
-          result="DILATED"
-        />
         <feImage
-          xlink:href="/assets/synced/images/water-2.jpeg"
+          xlink:href="/assets/synced/images/water-2-blur.png"
           result="IMAGE"
-          width="256"
-          height="256"
+          width="200"
+          height="200"
         />
-        <feTile in="IMAGE" result="TILE" />
-        <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
+        <feTile in="IMAGE" result="BACKDROP" />
         <!-- WON'T NEED THIS IF TILE IMAGE COLOR WAS EDITED BEFOREHAND -->
-        <feColorMatrix
-          type="matrix"
-          values="0.3  0  0    0  0
-                  0    1  0    0  0
-                  0    0  0.6  0  0
-                  0    0  0    1  0"
-          in="COMPOSITE"
-          result="BACKDROP"
-        />
 
         <!-- Create turbulence -->
         <feTurbulence
           id="turbulence"
           numOctaves="1"
-          seed="2"
           baseFrequency="0.02 0.06"
-          stitchTiles="stitch"
           result="NOISE"
         />
         <feDisplacementMap
@@ -50,37 +32,19 @@
 
       <filter id="filter-wave-2" x="0" y="0" width="100%" height="100%">
         <!-- Expand the path -->
-        <feMorphology
-          operator="dilate"
-          radius="20"
-          in="SourceAlpha"
-          result="DILATED"
-        />
         <feImage
-          xlink:href="/assets/synced/images/water-2.jpeg"
+          xlink:href="/assets/synced/images/water-2-blur.png"
           result="IMAGE"
-          width="256"
-          height="256"
+          width="200"
+          height="200"
         />
-        <feTile in="IMAGE" result="TILE" />
-        <feComposite operator="in" in="TILE" in2="DILATED" result="COMPOSITE" />
-        <feColorMatrix
-          type="matrix"
-          values="0.3  0  0    0  0
-                  0    1  0    0  0
-                  0    0  0.6  0  0
-                  0    0  0    1  0"
-          in="COMPOSITE"
-          result="BACKDROP"
-        />
+        <feTile in="IMAGE" result="BACKDROP" />
 
         <!-- Create turbulence -->
         <feTurbulence
           id="turbulence"
           numOctaves="1"
-          seed="2"
           baseFrequency="0.04 0.08"
-          stitchTiles="stitch"
           result="NOISE"
         />
         <feDisplacementMap
