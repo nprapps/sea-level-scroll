@@ -9,8 +9,8 @@ var slides = $(".sequence .slide").reverse();
 
 // Initialize leaflet map
 var map = L.map("base-map", { zoomControl: false }).setView(
-  [37.492215933518665, -122.20490342600418],
-  10
+  [37.466623667154515, -122.06826378148338],
+  13
 );
 L.tileLayer(
   "https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
