@@ -15,6 +15,7 @@ module.exports = class MapView extends View {
   constructor(map) {
     super();
     this.map = map;
+    this.zoomEnd;
   }
 
   enter(slide) {
@@ -26,6 +27,11 @@ module.exports = class MapView extends View {
     var currLayer = mapKey[slide.id];
     var assets = getLayerVals(currLayer, "assets");
     var labels = getLayerVals(currLayer, "label_ids");
+
+    this.zoomEnd = function() {
+      if (currLayer.map_class) document.body.classList.add(currLayer.map_class);
+    }
+    map.on("zoomend", this.zoomEnd);
 
     // Remove old layers if layer isn't in new map
     var keepAssets = [];
@@ -52,8 +58,6 @@ module.exports = class MapView extends View {
         duration: currLayer.duration,
         noMoveStart: true,
         easeLinearity: 0,
-        speed: 0.2, // make the flying slow
-        curve: 1, // change the speed at which it zooms out
       });
       pastBounds = bounds;
     }
@@ -65,14 +69,16 @@ module.exports = class MapView extends View {
 
   exit(slide) {
     super.exit(slide);
+    this.map.off("zoomend", this.zoomEnd);
     mapElement.classList.add("exiting");
     mapElement.classList.remove("active");
+    document.body.classList.remove("animate");
     setTimeout(() => mapElement.classList.remove("exiting"), 1000);
   }
 
   preload = async function (slide, preZoom) {
     var layer = mapKey[slide.id];
-    var assets = getLayerVals(layer, 'assets');
+    var assets = getLayerVals(layer, "assets");
     assets.forEach(function (a) {
       if (!mapAssets[a]) loadAsset(assetKey[a], a);
     });
@@ -91,12 +97,12 @@ var addMarkers = function (map, labels, bounds) {
     }
 
     var marker = new L.Marker([lat, lon], {
-        id: a.trim(),
-        icon: new L.DivIcon({
-          className: label.classNames.split(",").join(" "),
-          html: function(){            
-            if (label.classNames.includes("company")) {
-              return `
+      id: a.trim(),
+      icon: new L.DivIcon({
+        className: label.classNames.split(",").join(" "),
+        html: (function () {
+          if (label.classNames.includes("company")) {
+            return `
               <svg viewBox="0 0 600 600">\
                 <path fill="transparent" id="curve" d=\
                       "M100,150 C200,100 400,100 500,150" />\
@@ -106,16 +112,14 @@ var addMarkers = function (map, labels, bounds) {
                   </textPath>\
                 </text>\
               </svg>\
-            `
-            }
-            
-            else {
-              return `<span>${label.label}</span>`;
-            }
-          }(),
-          iconSize: [label.label_width,20]
-        }),
-      }).addTo(map);
+            `;
+          } else {
+            return `<span>${label.label}</span>`;
+          }
+        })(),
+        iconSize: [label.label_width, 20],
+      }),
+    }).addTo(map);
   });
 };
 
@@ -155,9 +159,21 @@ var fetchAsset = async function (asset) {
 // Loads an asset, optionally adds to map.
 var loadAsset = function (value, id, opt_map) {
   if (!value.path) return;
-  var styles = { className: value.classNames.split(",").join("") };
+
   fetchAsset(value.path).then(function (d) {
-    mapAssets[id] = L.geoJSON(d, { id: id, style: styles, smoothFactor:0});
+    mapAssets[id] = L.geoJSON(d, {
+      id: id,
+      style: function (feature) {
+        var year = "";
+        if (feature.properties && !!feature.properties.sale_date) {
+          year = " year-" + String(feature.properties.sale_date).slice(0, 4);
+        }
+        return {
+          className: value.classNames.split(",").join("") + year,
+        };
+      },
+      smoothFactor: 0,
+    });
     if (opt_map) mapAssets[id].addTo(opt_map);
   });
 };

@@ -54,7 +54,7 @@ path {
 
     &.flood-transparent {
       fill: none;
-      stroke-width: .75px;
+      stroke-width: 0.75px;
       stroke: #eee;
     }
   }
@@ -114,6 +114,10 @@ path {
   &.roads {
     stroke: #999;
     stroke-opacity: 0.5;
+  }
+
+  &.year {
+    opacity: 0;
   }
 }
 
@@ -188,5 +192,54 @@ path {
 
   .facebook > svg > text.curve {
     font-size: 80px !important;
+  }
+}
+
+.animate {
+  .active {
+    path {
+      opacity: 0;
+      &.year-2013 {
+        opacity: 1;
+      }
+
+      &.year-2014 {
+        animation-name: fade-in;
+        animation-delay: 1s;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+
+      &.year-2016 {
+        animation-name: fade-in;
+        animation-delay: 2s;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+      &.year-2017 {
+        animation-name: fade-in;
+        animation-delay: 3s;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+      &.year-2018 {
+        animation-name: fade-in;
+        animation-delay: 4s;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+      &.year-2019 {
+        animation-name: fade-in;
+        animation-delay: 5s;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+      &.year-2020 {
+        animation-name: fade-in;
+        animation-delay: 6s;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+      }
+    }
   }
 }
