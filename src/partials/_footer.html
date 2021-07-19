@@ -19,7 +19,7 @@
           <% } else { %>
           <a href="<%= link.url %>">
             <img
-              src="./assets/synced/thumbnails/<%= link.thumbnail %>"
+              src="<%= link.thumbnail %>"
               alt=""
             />
             <%= renderMarkdownText(link.title) %>

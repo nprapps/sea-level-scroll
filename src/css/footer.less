@@ -1,9 +1,6 @@
 footer.closing {
   .gotham();
-  // background: #222;
   background: rgba(3, 16, 18, .8);
-  min-height: 100vh;
-  padding-bottom: 44px;
 
   h4 {
     .knockout-header();
@@ -25,11 +22,9 @@ footer.closing {
   }
 
   .more-stories {
-    // background-color: @more-stories;
     color: #eee;
     padding: 120px 20px;
-    background-image: url(./assets/synced/images/DJI_0062.jpg);
-    background-size: cover;
+    
 
     .constrained {
       padding: 20px;
@@ -187,11 +182,17 @@ footer.closing {
 
   .about {
     padding: 44px 20px;
+    background-image: url(./assets/synced/images/DJI_0062.jpg);
+    background-size: cover;
   }
 
   .side-by-side {
     display: flex;
     margin-bottom: 22px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    backdrop-filter: blur(8px);
 
     .block {
       padding-right: 12px;
@@ -217,7 +218,8 @@ footer.closing {
   }
 
   .npr {
-    padding: 0 20px;
+    padding: 40px;
+    background: rgba(3, 16, 18);
 
     a, a:visited {
       color: @links-medium;
