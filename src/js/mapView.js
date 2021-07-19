@@ -28,7 +28,9 @@ module.exports = class MapView extends View {
     var assets = getLayerVals(currLayer, "assets");
     var labels = getLayerVals(currLayer, "label_ids");
 
+    console.log(currLayer, currLayer.map_class)
     this.zoomEnd = function() {
+      console.log("in zoomEnd")
       if (currLayer.map_class) document.body.classList.add(currLayer.map_class);
     }
     map.on("zoomend", this.zoomEnd);
@@ -82,7 +84,10 @@ module.exports = class MapView extends View {
     assets.forEach(function (a) {
       if (!mapAssets[a]) loadAsset(assetKey[a], a);
     });
-    if (preZoom) this.map.fitBounds(getBounds(layer));
+    if (preZoom) {
+      pastBounds = getBounds(layer);
+      this.map.fitBounds(pastBounds);
+    };
   };
 };
 
