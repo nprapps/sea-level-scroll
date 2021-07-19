@@ -8,7 +8,7 @@
   .knockout-header();
   text-align: center;
   color: #ccc;
-  font-size: .85rem;
+  font-size: 0.85rem;
   padding: 2rem 0;
   text-shadow: 0 2px fade(black, 20%);
 
@@ -17,8 +17,12 @@
   // }
 
   @keyframes drop {
-    from { transform: translateY(0); }
-    to { transform: translateY(50%); }
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(50%);
+    }
   }
 
   svg {
@@ -32,4 +36,14 @@
       fill: none;
     }
   }
+}
+
+.autoplay {
+  position: fixed;
+  bottom: 30px;
+  right: 0;
+  z-index: 100;
+  padding: 5px 10px;
+  text-align: right;
+  background: rgba(0, 0, 0, 0.5);
 }

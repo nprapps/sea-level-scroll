@@ -58,7 +58,7 @@ var activateSlide = function (slide) {
     if (!neighbor) return;
     var nextType = neighbor.dataset.type || 'image';
     var neighborHandler = handlers[nextType];
-    neighborHandler.preload(neighbor, handler != neighborHandler && offset == 1);
+    neighborHandler.preload(neighbor, (handler != neighborHandler && offset == 1 && index >= 2));
   });
 };
 
@@ -81,6 +81,14 @@ var onScroll = function () {
 document.body.classList.add("boot-complete");
 window.addEventListener("scroll", onScroll);
 onScroll();
+
+$.one('#video-play').addEventListener('change', function() {
+  var checked = $.one('#video-play').checked;
+  var videos = $('video');
+  if (checked) videos.forEach(v => v.setAttribute('autoplay', ''));
+  if (checked) videos.forEach(v => v.setAttribute('playsinline', ''));
+  if (!checked) videos.forEach(v => v.removeAttribute('autoplay'));
+});
 
 // link tracking
 var trackLink = function () {

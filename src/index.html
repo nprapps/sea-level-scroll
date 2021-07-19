@@ -28,7 +28,7 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
           print(t.include(`_${slide.type || "image"}.html`, { slide }));
         });
       %>
-
+      <div class="autoplay">Autoplay video <input id="video-play" type="checkbox" checked></div>
     </main>
 
     <%= t.include("partials/_footer.html", {doc, renderMarkdownText}) %>
