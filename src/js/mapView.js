@@ -15,7 +15,6 @@ module.exports = class MapView extends View {
   constructor(map) {
     super();
     this.map = map;
-    this.zoomEnd;
   }
 
   enter(slide) {
@@ -27,13 +26,6 @@ module.exports = class MapView extends View {
     var currLayer = mapKey[slide.id];
     var assets = getLayerVals(currLayer, "assets");
     var labels = getLayerVals(currLayer, "label_ids");
-
-    console.log(currLayer, currLayer.map_class)
-    this.zoomEnd = function() {
-      console.log("in zoomEnd")
-      if (currLayer.map_class) document.body.classList.add(currLayer.map_class);
-    }
-    map.on("zoomend", this.zoomEnd);
 
     // Remove old layers if layer isn't in new map
     var keepAssets = [];
@@ -67,11 +59,11 @@ module.exports = class MapView extends View {
     // Add new layers onto slide.
     addAssets(map, assets);
     addMarkers(map, labels, bounds);
+    if (currLayer.map_class) document.body.classList.add(currLayer.map_class);
   }
 
   exit(slide) {
     super.exit(slide);
-    this.map.off("zoomend", this.zoomEnd);
     mapElement.classList.add("exiting");
     mapElement.classList.remove("active");
     document.body.classList.remove("animate");
@@ -119,7 +111,7 @@ var addMarkers = function (map, labels, bounds) {
               </svg>\
             `;
           } else {
-            return `<span>${label.label}</span>`;
+            return `${label.label}`;
           }
         })(),
         iconSize: [label.label_width, 20],
@@ -171,7 +163,7 @@ var loadAsset = function (value, id, opt_map) {
       style: function (feature) {
         var year = "";
         if (feature.properties && !!feature.properties.sale_date) {
-          year = " year-" + String(feature.properties.sale_date).slice(0, 4);
+          year = " year year-" + String(feature.properties.sale_date).slice(0, 4);
         }
         return {
           className: value.classNames.split(",").join("") + year,

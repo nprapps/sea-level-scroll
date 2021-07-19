@@ -116,8 +116,7 @@
   }
 
   .watermark,
-  .inset, 
-  .timeline {
+  .inset {
     position: fixed;
     display: none;
     z-index: -1;
@@ -129,15 +128,6 @@
     border: 3px solid white;
     left: 0;
     bottom: 0;
-  }
-
-  .timeline {
-    max-width: 50%;
-    left: 50%;
-    top: 0;
-    font-weight: bold;
-    padding: 5px 10px;
-    background: rgba(0, 0, 0, 0.5);
   }
 
   .watermark {
@@ -178,12 +168,6 @@
     .watermark,
     .inset {
       display: block;
-    }
-
-    &.animate {
-      .timeline {
-        display: block;
-      }
     }
   }
 

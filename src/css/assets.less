@@ -38,7 +38,7 @@
 
 // Style leaflet tiles to help layers pop.
 .leaflet-tile-container {
-  filter: grayscale(30%) contrast(105%) brightness(0.85);
+  filter: contrast(110%) brightness(0.65);
 }
 
 // Asset path styles
@@ -46,10 +46,15 @@ path {
   &.flood {
     fill-opacity: 0.5;
     stroke: none;
+    // fill: url(#img4);
 
     &.flood-50,
     &.flood-100 {
-      animation: 1.5s linear wave-effect infinite;
+      // fill: url(#img4);
+      // fill-opacity: 0;
+      animation: linear wave-effect 1.5s infinite;
+      // animation: 3s linear fade-in;
+      // animation: fade-in 2s ease-in;
     }
 
     &.flood-transparent {
@@ -96,6 +101,11 @@ path {
     fill-opacity: 0.2;
   }
 
+  &.timeline {
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
   &.area {
     stroke: #ccc;
     stroke-width: 3px;
@@ -105,15 +115,10 @@ path {
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   }
 
-  &.east-palo-alto {
-  }
-
-  &.belle-haven {
-  }
-
   &.roads {
     stroke: #999;
-    stroke-opacity: 0.5;
+    stroke-opacity: 0.25;
+    stroke-width: 2px;
   }
 
   &.year {
@@ -125,6 +130,29 @@ path {
 .leaflet-marker-pane {
   .leaflet-marker-icon {
     min-width: 10px;
+
+    &.timeline {
+      min-width: 40px;
+      text-align: center;
+      border-bottom: 2px solid;
+
+      span {
+        opacity: 0;
+        animation-fill-mode: backwards;
+        color: #aaa;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        font-weight: bold;
+        font-size: 15px;
+        .gotham();
+
+        &.year-2020 {
+          animation-fill-mode: forwards;
+        }
+      }
+    }
   }
 
   .water-label,
@@ -202,7 +230,7 @@ path {
 
     font-weight: 400;
     line-height: 17px;
-    height: 17px;    
+    height: 17px;
     color: #fff;
     top: 1.1px;
     // font-style: italic;
@@ -223,49 +251,31 @@ path {
 
 .animate {
   .active {
-    path {
-      opacity: 0;
-      &.year-2013 {
-        opacity: 1;
-      }
-
-      &.year-2014 {
-        animation-name: fade-in;
-        animation-delay: 1s;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-
-      &.year-2016 {
-        animation-name: fade-in;
-        animation-delay: 2s;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-      &.year-2017 {
-        animation-name: fade-in;
-        animation-delay: 3s;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-      &.year-2018 {
-        animation-name: fade-in;
-        animation-delay: 4s;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-      &.year-2019 {
-        animation-name: fade-in;
-        animation-delay: 5s;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
-      &.year-2020 {
-        animation-name: fade-in;
-        animation-delay: 6s;
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-      }
+    .year {
+      animation-name: fade-in;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+    }
+    .year-2013 {
+      animation-delay: 1s;
+    }
+    .year-2014 {
+      animation-delay: 2s;
+    }
+    .year-2016 {
+      animation-delay: 3s;
+    }
+    .year-2017 {
+      animation-delay: 4s;
+    }
+    .year-2018 {
+      animation-delay: 5s;
+    }
+    .year-2019 {
+      animation-delay: 6s;
+    }
+    .year-2020 {
+      animation-delay: 7s;
     }
   }
 }
