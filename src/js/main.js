@@ -60,7 +60,10 @@ var activateSlide = function (slide) {
     if (!neighbor) return;
     var nextType = neighbor.dataset.type || "image";
     var neighborHandler = handlers[nextType];
-    neighborHandler.preload(neighbor, (handler != neighborHandler && offset == 1));
+    neighborHandler.preload(
+      neighbor,
+      handler != neighborHandler && offset == 1
+    );
   });
 };
 
@@ -85,6 +88,10 @@ window.addEventListener("scroll", onScroll);
 onScroll();
 
 player.autoplay.checked = true;
+
+// Reader can play/pause in-text videos individually
+// $("video:not(.backdrop)").forEach(v => v.toggleAttribute("controls", true));
+
 // $(".backdrop").forEach(el => el.dataset.played = "");
 var intro = $.one("#myVideo");
 player.play(intro);

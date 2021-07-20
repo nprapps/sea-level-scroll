@@ -3,7 +3,7 @@ var $ = require("./lib/qsa");
 var element = $.one(".autoplay");
 
 // Videos that are not slide backgrounds, i.e., those within text sections
-var nonBackdropVideos = $("video:not(.backdrop)");
+var textVideos = $("video:not(.backdrop)");
 
 // var isSafari = navigator.userAgent.match(/i(phone|pad)/i);
 
@@ -59,7 +59,6 @@ Player.prototype = {
   track: null,
   element: null,
   autoplay: null,
-  playingNonBackdrops: null,
   // playButton: null,
   // progress: null,
   // title: null,
@@ -92,23 +91,25 @@ Player.prototype = {
     if (promise) {
       promise.catch(err => console.log(err));
     }
-    // this.startNonBackdropVideos();
   },
 
-  // startNonBackdropVideos() {
-  //   var promise = Promise.all(
-  //     [...nonBackdropVideos].map(function (v) {
-  //       console.log(v.paused);
-  //       if (v.paused) return v.play();
-  //       return true;
-  //     })
-  //   );
-  //   if (promise) {
-  //     promise
-  //       .then(() => (this.playingNonBackdrops = true))
-  //       .catch(err => console.log(err));
-  //   }
-  // },
+  startTextVideos() {
+    var promise = Promise.all(
+      [...textVideos].map(v => {
+        if (v.paused) return v.play();
+      })
+    );
+    if (promise) {
+      // Not perfect, but works for now
+      promise.catch(err => {});
+    }
+  },
+
+  stopTextVideos() {
+    textVideos.forEach(v => {
+      if (!v.paused) v.pause();
+    });
+  },
 
   cue(track) {
     if (track != this.track) {
@@ -131,11 +132,6 @@ Player.prototype = {
     if (!this.track) return;
     // this.element.classList.remove("playing");
     this.track.pause();
-    // if (this.playingNonBackdrops) {
-    //   nonBackdropVideos.forEach(v => v.pause());
-    //   this.playingNonBackdrops = false;
-    // }
-
     // this.proxy.pause();
     // this.title.innerHTML = "";
     // this.playButton.setAttribute("aria-pressed", "false");
@@ -143,11 +139,11 @@ Player.prototype = {
 
   show() {
     // this.bug.classList.remove("show");
-    // this.element.classList.remove("hidden");
+    this.element.classList.remove("hidden");
   },
 
   hide() {
-    // this.element.classList.add("hidden");
+    this.element.classList.add("hidden");
     // this.bug.classList.remove("show");
   },
 
@@ -186,10 +182,12 @@ Player.prototype = {
     // trackEvent("autoplay-toggled", checked);
     if (!checked) {
       this.stop();
+      this.stopTextVideos();
     } else if (this.track && this.track.paused) {
       this.play(this.track);
+      this.startTextVideos();
     } else {
-      this.startNonBackdropVideos();
+      this.startTextVideos();
     }
   },
 

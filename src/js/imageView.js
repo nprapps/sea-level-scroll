@@ -10,7 +10,12 @@ module.exports = class ImageView extends View {
   enter(slide) {
     super.enter(slide);
     var video = $.one("video", slide);
-    if (!video) return;
+    // Show video toggle
+    if (!video) {
+      player.hide();
+      return;
+    }
+    player.show();
     if (player.autoplay.checked) {
       player.play(video);
     } else {
@@ -20,7 +25,9 @@ module.exports = class ImageView extends View {
 
   exit(slide) {
     super.exit(slide);
+    // Stop and hide video toggle
     player.stop();
+    player.hide();
   }
 
   preload(slide, active) {
