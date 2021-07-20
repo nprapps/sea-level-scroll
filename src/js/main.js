@@ -17,9 +17,10 @@ L.tileLayer(
   {
     attribution: "",
     id: "baseLayer",
-    subdomains: ['services', 'server'],
+    subdomains: ["services", "server"],
     edgeBufferTiles: 2,
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    attribution:
+      "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
   }
 ).addTo(map);
 
@@ -43,7 +44,7 @@ var activateSlide = function (slide) {
     handler.exit(active);
   }
 
-  var currType = slide.dataset.type || 'image';
+  var currType = slide.dataset.type || "image";
   handler = handlers[currType];
   handler.enter(slide);
 
@@ -56,7 +57,7 @@ var activateSlide = function (slide) {
   neighbors.forEach(function (offset) {
     var neighbor = all[index + offset];
     if (!neighbor) return;
-    var nextType = neighbor.dataset.type || 'image';
+    var nextType = neighbor.dataset.type || "image";
     var neighborHandler = handlers[nextType];
     neighborHandler.preload(neighbor, (handler != neighborHandler && offset == 1));
   });
@@ -72,7 +73,7 @@ var onScroll = function () {
         completion = complete;
         track("completion", completion + "%");
       }
-      console.log(`slide ${slides.length-1-i}, id: ${slide.id}`) 
+      console.log(`slide ${slides.length - 1 - i}, id: ${slide.id}`);
       return activateSlide(slide);
     }
   }
@@ -82,12 +83,10 @@ document.body.classList.add("boot-complete");
 window.addEventListener("scroll", onScroll);
 onScroll();
 
-$.one('#video-play').addEventListener('change', function() {
-  var checked = $.one('#video-play').checked;
-  var videos = $('video');
-  if (checked) videos.forEach(v => v.setAttribute('autoplay', ''));
-  if (checked) videos.forEach(v => v.setAttribute('playsinline', ''));
-  if (!checked) videos.forEach(v => v.removeAttribute('autoplay'));
+$.one("#video-play").addEventListener("change", function () {
+  var checked = $.one("#video-play").checked;
+  var videos = $("video");
+  videos.forEach(v => v.toggleAttribute("autoplay", checked));
 });
 
 // link tracking
