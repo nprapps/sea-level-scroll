@@ -4,6 +4,7 @@ var track = require("./lib/tracking");
 var mapView = require("./mapView");
 var imageView = require("./imageView");
 var textView = require("./textView");
+var player = require("./player");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -83,11 +84,10 @@ document.body.classList.add("boot-complete");
 window.addEventListener("scroll", onScroll);
 onScroll();
 
-$.one("#video-play").addEventListener("change", function () {
-  var checked = $.one("#video-play").checked;
-  var videos = $("video");
-  videos.forEach(v => v.toggleAttribute("autoplay", checked));
-});
+player.autoplay.checked = true;
+// $(".backdrop").forEach(el => el.dataset.played = "");
+var intro = $.one("#myVideo");
+player.play(intro);
 
 // link tracking
 var trackLink = function () {
