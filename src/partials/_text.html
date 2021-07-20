@@ -1,4 +1,5 @@
 <% if (Array.isArray(slide.text)) {
+  
     slide.text.forEach(function(d) { %>
     <div class="text">
     <div class="content">
@@ -8,9 +9,9 @@
     <div class="caption">
       <span class="sr-only">Caption:</span> <%= d.caption %>
     </div>
-    </div>
+   
     <% } %>
-
+ </div>
   <% }) } else if (slide.text) { %>
   <div class="text">
     <div class="content">
