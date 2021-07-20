@@ -1,6 +1,6 @@
 <% if (Array.isArray(slide.text)) {
     slide.text.forEach(function(d) { %>
-      <div class="text">
+    <div class="text">
     <div class="content">
       <%= t.renderMarkdown(d.text) %>
     </div>
@@ -8,10 +8,10 @@
     <div class="caption">
       <span class="sr-only">Caption:</span> <%= d.caption %>
     </div>
+    </div>
     <% } %>
-  </div>
 
-  <% }) } else { %>
+  <% }) } else if (slide.text) { %>
   <div class="text">
     <div class="content">
       <%= t.renderMarkdown(slide.text) %>
@@ -20,6 +20,16 @@
     <div class="caption">
       <span class="sr-only">Caption:</span> <%= slide.caption %>
     </div>
+    </div>
     <% } %>
-  </div>
-  <% } %>
+
+  <% } else { %>
+    <div class="scroll-bug" aria-hidden="true">
+      scroll
+      <svg viewBox="0 0 50 50" width="50" height="25">
+        <path
+        d="M 0,0 L 25,25 50,0"
+        ></path>
+      </svg>
+    </div>
+  <%} %>

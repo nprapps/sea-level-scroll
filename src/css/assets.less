@@ -2,10 +2,10 @@
 
 @keyframes wave-effect {
   from {
-    filter: url(#filter-wave-1);
+    fill: url(#wave3);
   }
   to {
-    filter: url(#filter-wave-2);
+    fill: url(#wave2);
   }
 }
 
@@ -44,17 +44,12 @@
 // Asset path styles
 path {
   &.flood {
-    fill-opacity: 0.5;
+    fill-opacity: 0.45;
     stroke: none;
-    // fill: url(#img4);
 
     &.flood-50,
     &.flood-100 {
-      // fill: url(#img4);
-      // fill-opacity: 0;
-      animation: linear wave-effect 1.5s infinite;
-      // animation: 3s linear fade-in;
-      // animation: fade-in 2s ease-in;
+      animation: .75s ease-in-out wave-effect infinite;
     }
 
     &.flood-transparent {

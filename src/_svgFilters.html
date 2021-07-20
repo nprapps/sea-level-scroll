@@ -1,62 +1,19 @@
 <div id="svg-filters">
   <svg>
     <defs>
-      <filter id="filter-wave-1" x="0" y="0" width="100%" height="100%">
-        <!-- Expand the path -->
-        <feImage
-          xlink:href="./assets/synced/images/water-2-blur.png"
-          result="IMAGE"
-          width="400"
-          height="400"
-        />
-        <feTile in="IMAGE" result="BACKDROP" />
-        <!-- WON'T NEED THIS IF TILE IMAGE COLOR WAS EDITED BEFOREHAND -->
-
-        <!-- Create turbulence -->
-        <feTurbulence
-          id="turbulence"
-          numOctaves="1"
-          baseFrequency="0.02 0.06"
-          result="NOISE"
-        />
-        <feDisplacementMap
-          scale="20"
-          in="BACKDROP"
-          in2="NOISE"
-          result="TURBULENCE"
-        />
-
-        <!-- Finally, crop expanded, turbulated path back to original size to remove edge noise -->
-        <feComposite operator="in" in="TURBULENCE" in2="SourceGraphic" />
-      </filter>
-
-      <filter id="filter-wave-2" x="0" y="0" width="100%" height="100%">
-        <!-- Expand the path -->
-        <feImage
-          xlink:href="./assets/synced/images/water-2-blur.png"
-          result="IMAGE"
-          width="400"
-          height="400"
-        />
-        <feTile in="IMAGE" result="BACKDROP" />
-
-        <!-- Create turbulence -->
-        <feTurbulence
-          id="turbulence"
-          numOctaves="1"
-          baseFrequency="0.03 0.07"
-          result="NOISE"
-        />
-        <feDisplacementMap
-          scale="20"
-          in="BACKDROP"
-          in2="NOISE"
-          result="TURBULENCE"
-        />
-
-        <!-- Finally, crop expanded, turbulated path back to original size to remove edge noise -->
-        <feComposite operator="in" in="TURBULENCE" in2="SourceGraphic" />
-      </filter>
+      <defs>
+       <pattern id="wave1" patternUnits="userSpaceOnUse" width="256" height="256">
+        <image href="./assets/synced/images/water-1-ripple.png" x="0" y="0" width="256" height="256" />
+      </pattern>
+       <pattern id="wave2" patternUnits="userSpaceOnUse" width="256" height="256">
+        <image href="./assets/synced/images/water-2-ripple.png" x="0" y="0" width="256" height="256" />
+      </pattern>
+       <pattern id="wave3" patternUnits="userSpaceOnUse" width="256" height="256">
+        <image href="./assets/synced/images/water-3-ripple.png" x="0" y="0" width="256" height="256" />
+      </pattern>
+      <pattern id="wave4" patternUnits="userSpaceOnUse" width="256" height="256">
+        <image href="./assets/synced/images/water-4-ripple.png" x="0" y="0" width="256" height="256" />
+      </pattern>
     </defs>
   </svg>
 </div>
