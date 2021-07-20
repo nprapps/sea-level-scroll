@@ -17,6 +17,19 @@
     line-height: 1.7;
     font-size: 17px;
 
+    span.highlight {
+  border-bottom: @highlight;
+  color: #fff;
+}
+
+span.facebook {
+  color: @facebook;
+}
+
+span.google {
+  color: @google;
+}
+
     @media @mobile {
       font-size: 15px;
     }
@@ -36,10 +49,6 @@
   & + .slide .text {
     // margin-top: 30vh;
   }
-}
-
-span.highlight {
-  border-bottom: @highlight;
 }
 
 .key {

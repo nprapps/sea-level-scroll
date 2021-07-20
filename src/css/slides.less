@@ -39,26 +39,12 @@
   width: 55%;
   max-width: 450px !important;
   height: 100px;
-  // margin-bottom:38px;
   background: url(./assets/synced/images/wave-06.svg);
   background-repeat: repeat;
-  // background-position-x: 0%;
-  // background-position-y: 0%;
   background-size: auto auto;
   background-repeat: repeat-x;
   background-size: 400px 100px;
-  // background-position: 2px 19px;
   background-position: center;
-  // animation: move 15s linear infinite;
-  // -webkit-animation: move 15s linear infinite;
-
-  // height: 35px;
-  // background: url(../assets/synced/images/wave.svg);
-  // background-size: 40px 5px;
-  // background-position: 2px 19px;
-  // background-position: center;
-  // animation: move 15s linear infinite;
-  // -webkit-animation: move 15s linear infinite;
 }
 
 .slide {
@@ -70,21 +56,6 @@
   a:visited {
     color: @bay-blue-medium;
     text-decoration: none;
-    // padding-bottom: 5px;
-    // background: url(../assets/synced/images/wave.svg);
-    // background-repeat: repeat;
-    // background-position-x: 0%;
-    // background-position-y: 0%;
-    // background-size: auto auto;
-    // background-repeat: repeat-x;
-    // background-size: 40px 5px;
-    // background-position: 2px 19px;
-    // animation: move 15s linear infinite;
-    // -webkit-animation: move 15s linear infinite;
-    // animation-play-state: paused;
-    // text-decoration: none;
-    // background-color: transparent;
-    // -webkit-text-decoration-skip: objects;
   }
 
   a:hover,
@@ -183,6 +154,19 @@
     margin: 5vh 40px 90vh;
     width: 35%;
     float: right;
+
+    span.highlight {
+      border-bottom: @highlight;
+      color: #fff;
+    }
+
+    span.facebook {
+      color: @facebook;
+    }
+
+    span.google {
+      color: @google;
+    }
 
     .legend& {
       width: 15%;
@@ -341,11 +325,6 @@ section.text {
         align-items: center;
         grid-gap: 8px;
 
-        span {
-          text-align: right;
-          display: block;
-        }
-
         img,
         video {
           width: 100%;
@@ -361,6 +340,11 @@ section.text {
       img {
         outline: none;
       }
+    }
+
+    div > span {
+      text-align: right;
+      display: block;
     }
 
     h2 {
