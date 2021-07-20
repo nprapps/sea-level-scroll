@@ -325,9 +325,14 @@ section.text {
           max-width: 500px;
           width: 100%;
         }
-      }
 
-      
+        video {
+          @media @mobile {
+            object-fit: cover;
+            width: 100%;
+          }
+        }
+      }
 
       &.image-container {
         display: grid;
@@ -337,13 +342,13 @@ section.text {
         grid-gap: 8px;
 
         span {
-        text-align: right;
-        display: block;
-      }
+          text-align: right;
+          display: block;
+        }
 
         img,
         video {
-          width:100%;
+          width: 100%;
           height: auto;
         }
 
