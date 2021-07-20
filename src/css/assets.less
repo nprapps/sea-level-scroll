@@ -1,10 +1,22 @@
 @import "values";
 
 @keyframes wave-effect {
-  from {
+  0% {
+    fill: url(#wave1);
+  }
+  20% {
+    fill: url(#wave2);
+  }
+  40% {
     fill: url(#wave3);
   }
-  to {
+  60% {
+    fill: url(#wave4);
+  }
+  80% {
+    fill: url(#wave3);
+  }
+  100% {
     fill: url(#wave2);
   }
 }
@@ -49,7 +61,12 @@ path {
 
     &.flood-50,
     &.flood-100 {
-      animation: .75s ease-in-out wave-effect infinite;
+      fill: url(#wave1);
+      animation: 1.75s linear wave-effect infinite;
+    }
+
+    &.flood-100 {
+      animation: 2s ease-in partial-fade-in, 1.75s linear wave-effect infinite;
     }
 
     &.flood-transparent {
@@ -257,29 +274,29 @@ path {
   .active {
     .year {
       animation-name: fade-in;
-      animation-duration: 1s;
+      animation-duration: 2s;
       animation-timing-function: ease-out;
     }
     .year-2013 {
       animation-delay: 1s;
     }
     .year-2014 {
-      animation-delay: 2s;
-    }
-    .year-2016 {
       animation-delay: 3s;
     }
-    .year-2017 {
-      animation-delay: 4s;
-    }
-    .year-2018 {
+    .year-2016 {
       animation-delay: 5s;
     }
+    .year-2017 {
+      animation-delay: 7s;
+    }
+    .year-2018 {
+      animation-delay: 9s;
+    }
     .year-2019 {
-      animation-delay: 6s;
+      animation-delay: 11s;
     }
     .year-2020 {
-      animation-delay: 7s;
+      animation-delay: 13s;
     }
   }
 }
