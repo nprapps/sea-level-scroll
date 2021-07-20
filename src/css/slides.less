@@ -323,12 +323,11 @@ section.text {
 
         div {
           max-width: 500px;
+          width: 100%;
         }
       }
 
-      span {
-        text-align: right;
-      }
+      
 
       &.image-container {
         display: grid;
@@ -337,12 +336,15 @@ section.text {
         align-items: center;
         grid-gap: 8px;
 
+        span {
+        text-align: right;
+        display: block;
+      }
+
         img,
         video {
-          min-width: 0;
-          min-height: 0;
-          max-height: 100%;
-          object-fit: contain;
+          width:100%;
+          height: auto;
         }
 
         @media @portrait {
