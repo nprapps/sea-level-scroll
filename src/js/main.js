@@ -5,7 +5,7 @@ var track = require("./lib/tracking");
 var mapView = require("./mapView");
 var imageView = require("./imageView");
 var textView = require("./textView");
-var player = require("./player");
+require("./videos");
 
 var slides = $(".sequence .slide").reverse();
 
