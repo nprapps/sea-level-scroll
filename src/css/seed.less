@@ -82,18 +82,29 @@
     border: 1px solid #eee;
     border-radius: 1px;
 
+    @media @mobile {
+      height: 12px;
+      width: 12px;
+    }
+
     &:checked {
       border: none;
       background-color: @bay-blue-medium;
 
       & + label::before {
+        font-size: 13px;
         cursor: pointer;
         content: "\2713";
         display: block;
         color: #000;
         position: absolute;
-        left: calc(@padding-sides + @padding-left + 1px);
-        top: calc(@padding-top + @top);
+        left: calc(@padding-sides + @padding-left + 2px);
+        top: calc(@padding-top + @top + 1px);
+
+        @media @mobile {
+          left: calc(@padding-sides + @padding-left + 1px);
+          top: calc(@padding-top + @top - 1px);
+        }
       }
     }
   }
