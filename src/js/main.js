@@ -10,7 +10,7 @@ var player = require("./player");
 var slides = $(".sequence .slide").reverse();
 
 // Initialize leaflet map
-var map = L.map("base-map", { zoomControl: false }).setView(
+var map = L.map("base-map", { zoomControl: false, fadeAnimation: false, markerZoomAnimation: false}).setView(
   [37.466623667154515, -122.06826378148338],
   13
 );
@@ -20,7 +20,7 @@ L.tileLayer(
     attribution: "",
     id: "baseLayer",
     subdomains: ["services", "server"],
-    edgeBufferTiles: 2,
+    
     attribution:
       "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
   }
@@ -89,11 +89,6 @@ window.addEventListener("scroll", debounce(onScroll, 50));
 onScroll();
 
 player.autoplay.checked = true;
-
-// Reader can play/pause in-text videos individually
-// $("video:not(.backdrop)").forEach(v => v.toggleAttribute("controls", true));
-
-// $(".backdrop").forEach(el => el.dataset.played = "");
 var intro = $.one("#myVideo");
 player.play(intro);
 
