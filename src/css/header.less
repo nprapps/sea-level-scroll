@@ -96,3 +96,53 @@ header.splash {
     }
   }
 }
+
+.a11y-controls {
+  padding: 0 0 11px 0;
+  line-height: 1;
+  text-align: center;
+
+  @media @mobile-above {
+    padding: 20px 0;
+  }
+
+  input[type="checkbox"] {
+    .sr-only;
+
+    & + label {
+      .gotham();
+      color: @gray-light;
+      cursor: pointer;
+      font-size: 12px;
+      font-style: italic;
+      padding: 8px;
+    }
+
+    &:focus + label,
+    label:focus {
+      outline: 1px solid @gray-intermediate;
+    }
+
+    & + label::after {
+      font-style: normal;
+      display: inline-block;
+      content: "✘";
+      margin-left: 8px;
+      width: 1.2em;
+      height: 1.2em;
+      border-radius: 2px;
+      line-height: 1.2em;
+      color: @gray-intermediate;
+      background: @gray-dark;
+      cursor: pointer;
+      border: 1px solid darken(@gray-medium, 15%);
+    }
+
+    &:checked + label::after {
+      background: @gray-intermediate;
+      content: "✔";
+      color: @gray-dark;
+      border-color: transparent;
+    }
+  }
+}

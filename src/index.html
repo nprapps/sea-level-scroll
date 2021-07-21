@@ -28,8 +28,6 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
           print(t.include(`_${slide.type || "image"}.html`, { slide }));
         });
       %>
-
-      <%= t.include("_player.html") %>
     </main>
 
     <%= t.include("partials/_footer.html", {doc, renderMarkdownText}) %>

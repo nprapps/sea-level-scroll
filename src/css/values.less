@@ -15,75 +15,75 @@
 /*
  * Fonts
  */
-@gotham: 'Gotham SSm', Helvetica, Arial, sans-serif;
-@knockout: 'Knockout 31 4r','Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-@sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+@gotham: "Gotham SSm", Helvetica, Arial, sans-serif;
+@knockout: "Knockout 31 4r", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+@sans: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 @serif: Georgia, "Times New Roman", Times, serif;
 
 .gotham() {
-    font-family: @gotham;
-    font-weight: normal;
-    font-weight: 400;
+  font-family: @gotham;
+  font-weight: normal;
+  font-weight: 400;
 }
 
 // Normal Knockout
 .knockout() {
-    font-family: @knockout;
-    font-weight: normal;
+  font-family: @knockout;
+  font-weight: normal;
 }
 
 // Knockout, uppercased
 .knockout-upper() {
-    .knockout();
-    text-transform: uppercase;
+  .knockout();
+  text-transform: uppercase;
 }
 
 // Knockout for headings
 .knockout-header() {
-    .knockout-upper();
-    letter-spacing: 0.05em;
-    -webkit-font-smoothing: antialiased;
+  .knockout-upper();
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
 }
 
 /*
  * Colors
  */
-@accent-dark: #4774CC;
+@accent-dark: #4774cc;
 @accent-light: #bccae5;
 
 @rigorous: #d62021;
 @unbiased: #000005;
 @true: #237bbd;
 
-@white:               #fff;
-@off-white:           #eee;
-@gray-light:          #ccc;
-@gray-intermediate:   #999;
-@gray-medium:         #666;
-@gray-dark:           #333;
-@off-black:           #111;
-@black:               #000;
+@white: #fff;
+@off-white: #eee;
+@gray-light: #ccc;
+@gray-intermediate: #999;
+@gray-medium: #666;
+@gray-dark: #333;
+@off-black: #111;
+@black: #000;
 
-@bay-blue-light:      #c1e3d2;
-@bay-blue-medium:     #8fbda6;
-@bay-blue-dark:       #264033;
+@bay-blue-light: #c1e3d2;
+@bay-blue-medium: #8fbda6;
+@bay-blue-dark: #264033;
 
-@accent-dark:         #4774CC;
-@accent-light:        #bccae5;
+@accent-dark: #4774cc;
+@accent-light: #bccae5;
 
-@links-lightest:      @white;
-@links-light:         @off-white;
-@links-light-hover:   darken(@off-white, 20%);
-@links-medium:        @gray-medium;
-@links-medium-hover:  @links-light-hover;
+@links-lightest: @white;
+@links-light: @off-white;
+@links-light-hover: darken(@off-white, 20%);
+@links-medium: @gray-medium;
+@links-medium-hover: @links-light-hover;
 
-@neutral:             @gray-medium;
+@neutral: @gray-medium;
 
 @more-stories: #295578;
 
 @soft-blue: #8aafeb;
 
-@google: #ffd04d;//#4285F4;
+@google: #ffd04d; //#4285F4;
 @facebook: #6195ff;
 @levee: @bay-blue-light;
 
@@ -128,7 +128,19 @@
     opacity: 0;
   }
   to {
-    fill-opacity: .45;
+    fill-opacity: 0.45;
     opacity: 1;
   }
+}
+
+/*
+ * A11y
+ */
+.sr-only {
+  opacity: 0;
+  position: absolute;
+  left: -1000px;
+  clip: inset(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
 }

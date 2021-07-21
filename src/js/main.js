@@ -5,7 +5,7 @@ var track = require("./lib/tracking");
 var mapView = require("./mapView");
 var imageView = require("./imageView");
 var textView = require("./textView");
-var player = require("./player");
+require("./videos");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -87,15 +87,6 @@ var onScroll = function () {
 document.body.classList.add("boot-complete");
 window.addEventListener("scroll", debounce(onScroll, 50));
 onScroll();
-
-player.autoplay.checked = true;
-
-// Reader can play/pause in-text videos individually
-// $("video:not(.backdrop)").forEach(v => v.toggleAttribute("controls", true));
-
-// $(".backdrop").forEach(el => el.dataset.played = "");
-var intro = $.one("#myVideo");
-player.play(intro);
 
 // link tracking
 var trackLink = function () {
