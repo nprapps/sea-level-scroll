@@ -60,13 +60,18 @@ path {
     stroke: none;
 
     &.flood-50,
-    &.flood-100 {
+    &.flood-100,
+    &.flood-levee {
       fill: url(#wave1);
       animation: 1.75s linear wave-effect infinite;
     }
 
     &.flood-100 {
       animation: 2s ease-in partial-fade-in, 1.75s linear wave-effect infinite;
+    }
+
+    &.flood-levee {
+      animation: none;
     }
 
     &.flood-transparent {
@@ -78,10 +83,13 @@ path {
 
   &.levee {
     stroke: @levee;
+    stroke-width:4px;
     filter: drop-shadow(0px 0px 4px #fff);
 
     &.google {
       stroke-width: 2.5px;
+      fill: @levee;
+      fill-opacity:1;
     }
   }
 
