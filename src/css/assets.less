@@ -163,29 +163,6 @@ path {
 .leaflet-marker-pane {
   .leaflet-marker-icon {
     min-width: 10px;
-
-    &.timeline {
-      min-width: 40px;
-      text-align: center;
-      border-bottom: 2px solid;
-
-      span {
-        opacity: 0;
-        animation-fill-mode: backwards;
-        color: #aaa;
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        font-weight: bold;
-        font-size: 15px;
-        .gotham();
-
-        &.year-2020 {
-          animation-fill-mode: forwards;
-        }
-      }
-    }
   }
 
   .water-label,
@@ -290,9 +267,7 @@ path {
 
 .timeline {
   display: none;
-  position: fixed;
-  left: 5px;
-  bottom: 40vh;
+
   text-shadow: @textShadow;
 
   .year-2013 & {
@@ -300,12 +275,12 @@ path {
   }
 
   div {
-    opacity: 0.1;
+    opacity: 0.4;
+    display: inline-block;
+    font-size: 80%;
 
     &::after {
-      display: block;
-      text-align: center;
-      content: '|';
+      content: ' - ';
     }
 
     &.year-2020::after{
