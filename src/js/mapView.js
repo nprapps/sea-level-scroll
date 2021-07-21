@@ -10,6 +10,7 @@ var mapElement = $.one("#base-map");
 
 var mapAssets = {};
 var pastBounds = null;
+var classes;
 
 module.exports = class MapView extends View {
   constructor(map) {
@@ -26,6 +27,9 @@ module.exports = class MapView extends View {
     var currLayer = mapKey[slide.id];
     var assets = getLayerVals(currLayer, "assets");
     var labels = getLayerVals(currLayer, "label_ids");
+
+    classes = currLayer.map_class ? currLayer.map_class.split(', ').reverse() : [];
+    if (classes.length) window.addEventListener("scroll", onMapScroll);
 
     // Remove old layers if layer isn't in new map
     var keepAssets = [];
@@ -59,15 +63,16 @@ module.exports = class MapView extends View {
     // Add new layers onto slide.
     addAssets(map, assets);
     addMarkers(map, labels, bounds);
-    if (currLayer.map_class) document.body.classList.add(currLayer.map_class);
   }
 
   exit(slide) {
+    window.removeEventListener("scroll", onMapScroll);
+    classes.forEach(c => document.body.classList.remove(c))
     super.exit(slide);
     mapElement.classList.add("exiting");
     mapElement.classList.remove("active");
-    document.body.classList.remove("animate");
     setTimeout(() => mapElement.classList.remove("exiting"), 1000);
+    
   }
 
   preload = async function (slide, preZoom) {
@@ -173,6 +178,24 @@ var loadAsset = function (value, id, opt_map) {
     });
     if (opt_map) mapAssets[id].addTo(opt_map);
   });
+};
+
+var onMapScroll = function () {
+  var content = $.one('.active.slide .content');
+  var bounds = content.getBoundingClientRect();
+  var h = window.innerHeight;
+  h = h / classes.length;
+  var index = Math.floor(bounds.top / h);
+
+  for (var i = classes.length - 1; i >= 0; i-- ) {
+    if (i >= index) { 
+      document.body.classList.add(classes[i])
+    } else {
+      document.body.classList.remove(classes[i])
+    }
+    
+  }
+
 };
 
 var getLayerVals = function (layer, prop) {

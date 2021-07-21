@@ -56,7 +56,7 @@
 // Asset path styles
 path {
   &.flood {
-    fill-opacity: 0.40;
+    fill-opacity: 0.4;
     stroke: none;
 
     &.flood-50,
@@ -72,7 +72,7 @@ path {
     &.flood-transparent {
       fill: none;
       stroke-width: 2px;
-      stroke: rgba(255, 255, 255, .15);
+      stroke: rgba(255, 255, 255, 0.15);
     }
   }
 
@@ -134,7 +134,7 @@ path {
   &.fb21 {
     fill-opacity: 0;
     stroke: #fff;
-    stroke-width:0.5px;
+    stroke-width: 0.5px;
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   }
 
@@ -241,20 +241,14 @@ path {
     font-size: 140px;
     fill: #fff;
     text-shadow: 0 0 5px rgba(0, 0, 0);
-    text-shadow: 
-      0 4px 2px #000,
-      0 0 20px @google,
-      0 0 20px @google,
+    text-shadow: 0 4px 2px #000, 0 0 20px @google, 0 0 20px @google,
       0 0 20px @google;
     letter-spacing: 5px;
   }
 
   .facebook > svg > text.curve {
     font-size: 100px !important;
-    text-shadow: 
-      0 4px 2px #000,      
-      0 0 20px @facebook,
-      0 0 20px @facebook;
+    text-shadow: 0 4px 2px #000, 0 0 20px @facebook, 0 0 20px @facebook;
   }
 
   .note {
@@ -281,33 +275,54 @@ path {
   }
 }
 
-.animate {
-  .active {
-    .year {
-      animation-name: fade-in;
-      animation-duration: 2s;
-      animation-timing-function: ease-out;
+.timeline {
+  display: none;
+  position: fixed;
+  left: 5px;
+  bottom: 40vh;
+  text-shadow: @textShadow;
+
+  .year-2013 & {
+    display: block;
+  }
+
+  div {
+    opacity: 0.1;
+
+    &::after {
+      display: block;
+      text-align: center;
+      content: '|';
     }
-    .year-2013 {
-      animation-delay: 1s;
-    }
-    .year-2014 {
-      animation-delay: 3s;
-    }
-    .year-2016 {
-      animation-delay: 5s;
-    }
-    .year-2017 {
-      animation-delay: 7s;
-    }
-    .year-2018 {
-      animation-delay: 9s;
-    }
-    .year-2019 {
-      animation-delay: 11s;
-    }
-    .year-2020 {
-      animation-delay: 13s;
-    }
+
+    &.year-2020::after{
+        content: '';
+      }
+  }
+}
+
+.year-2013 .timeline div.year-2013,
+.year-2014 .timeline div.year-2014,
+.year-2016 .timeline div.year-2016,
+.year-2017 .timeline div.year-2017,
+.year-2018 .timeline div.year-2018,
+.year-2019 .timeline div.year-2019,
+.year-2020 .timeline div.year-2020 {
+  opacity: 1;
+}
+
+.year {
+  opacity: 0;
+  animation: 0.4s linear fade-out;
+
+  .year-2013 .year-2013&,
+  .year-2014 .year-2014&,
+  .year-2016 .year-2016&,
+  .year-2017 .year-2017&,
+  .year-2018 .year-2018&,
+  .year-2019 .year-2019&,
+  .year-2020 .year-2020& {
+    animation: 1s linear fade-in;
+    animation-fill-mode: forwards;
   }
 }
