@@ -1,4 +1,5 @@
 var $ = require("./lib/qsa");
+var debounce = require("./lib/debounce");
 require("./lib/edgeBuffer");
 var track = require("./lib/tracking");
 var mapView = require("./mapView");
@@ -84,7 +85,7 @@ var onScroll = function () {
 };
 
 document.body.classList.add("boot-complete");
-window.addEventListener("scroll", onScroll);
+window.addEventListener("scroll", debounce(onScroll, 50));
 onScroll();
 
 player.autoplay.checked = true;
