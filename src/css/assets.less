@@ -119,7 +119,7 @@ path {
   }
 
   &.area {
-    stroke: #ccc;
+    stroke: #eee;
     stroke-width: 2px;
     stroke-dasharray: 3px 5px;
     stroke-linecap: round;
@@ -132,9 +132,10 @@ path {
   }
 
   &.fb21 {
-    fill-opacity: 0;
+    fill-opacity: 0.4;
+    fill:#333;
     stroke: #fff;
-    stroke-width:0.5px;
+    stroke-width:2px;
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   }
 
@@ -239,22 +240,23 @@ path {
     .knockout();
 
     font-size: 140px;
-    fill: #fff;
-    text-shadow: 0 0 5px rgba(0, 0, 0);
-    text-shadow: 
-      0 4px 2px #000,
-      0 0 20px @google,
-      0 0 20px @google,
-      0 0 20px @google;
+    fill: darken(@google,10%);
     letter-spacing: 5px;
+    text-shadow: none;
+    stroke: #fff;
+    stroke-width: 7px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    paint-order: stroke fill;
   }
 
   .facebook > svg > text.curve {
     font-size: 100px !important;
-    text-shadow: 
-      0 4px 2px #000,      
-      0 0 20px @facebook,
-      0 0 20px @facebook;
+    fill: darken(@facebook,10%);
+    // text-shadow: 
+    //   0 4px 2px #000,      
+    //   0 0 20px @facebook,
+    //   0 0 20px @facebook;
   }
 
   .note {
