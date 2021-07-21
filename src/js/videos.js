@@ -7,6 +7,15 @@ var flags = {
 
 var autoplayers = $("video[autoplay]");
 
+// Uncomment if there's weird flashing in Chrome
+// autoplayers.forEach(function(video) {
+//   video.addEventListener("timeupdate", function(e) {
+//     if (video.currentTime > video.duration - .3) {
+//       video.currentTime = .2;
+//     }
+//   })
+// });
+
 // handle accessibility toggles
 var autoplayCheck = $.one("#autoplay-video");
 
