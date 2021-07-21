@@ -51,6 +51,12 @@
   text-align: right;
   background: rgba(0, 0, 0, 0.5);
 
+  @media @mobile {
+    font-size: 12px;
+    padding: calc(@padding-top - 2px) calc(@padding-sides - 1px);
+    padding-bottom: calc(@padding-top + 1px);
+  }
+
   &,
   input,
   label {
