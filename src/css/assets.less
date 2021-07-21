@@ -60,13 +60,18 @@ path {
     stroke: none;
 
     &.flood-50,
-    &.flood-100 {
+    &.flood-100,
+    &.flood-levee {
       fill: url(#wave1);
       animation: 1.75s linear wave-effect infinite;
     }
 
     &.flood-100 {
       animation: 2s ease-in partial-fade-in, 1.75s linear wave-effect infinite;
+    }
+
+    &.flood-levee {
+      animation: none;
     }
 
     &.flood-transparent {
@@ -78,9 +83,13 @@ path {
 
   &.levee {
     stroke: @levee;
+    stroke-width:4px;
+    filter: drop-shadow(0px 0px 4px #fff);
 
     &.google {
       stroke-width: 2.5px;
+      fill: @levee;
+      fill-opacity:1;
     }
   }
 
@@ -119,7 +128,7 @@ path {
   }
 
   &.area {
-    stroke: #ccc;
+    stroke: #eee;
     stroke-width: 2px;
     stroke-dasharray: 3px 5px;
     stroke-linecap: round;
@@ -132,9 +141,10 @@ path {
   }
 
   &.fb21 {
-    fill-opacity: 0;
+    fill-opacity: 0.4;
+    fill:#333;
     stroke: #fff;
-    stroke-width: 0.5px;
+    stroke-width:2px;
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   }
 
@@ -239,16 +249,19 @@ path {
     .knockout();
 
     font-size: 140px;
-    fill: #fff;
-    text-shadow: 0 0 5px rgba(0, 0, 0);
-    text-shadow: 0 4px 2px #000, 0 0 20px @google, 0 0 20px @google,
-      0 0 20px @google;
+    fill: darken(@google,10%);
     letter-spacing: 5px;
+    text-shadow: none;
+    stroke: #fff;
+    stroke-width: 7px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    paint-order: stroke fill;
   }
 
   .facebook > svg > text.curve {
     font-size: 100px !important;
-    text-shadow: 0 4px 2px #000, 0 0 20px @facebook, 0 0 20px @facebook;
+    fill: darken(@facebook,10%);
   }
 
   .note {

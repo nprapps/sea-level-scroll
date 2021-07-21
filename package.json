@@ -5,7 +5,7 @@
   "author": "ruthwtalbot",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nprapps/levee-interactive.git"
+    "url": "https://github.com/nprapps/sea-level-scroll.git"
   },
   "dependencies": {
     "@babel/core": "^7.4.3",
