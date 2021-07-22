@@ -1,6 +1,5 @@
 var $ = require("./lib/qsa");
 var debounce = require("./lib/debounce");
-require("./lib/edgeBuffer");
 var track = require("./lib/tracking");
 var mapView = require("./mapView");
 var imageView = require("./imageView");
