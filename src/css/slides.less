@@ -303,15 +303,10 @@ section.text {
     p,
     h2 {
       max-width: 677px;
-      margin: 20px auto;
+      margin: 20px auto 5px auto;
 
       &.full-width {
         max-width: 1024px;
-
-        div {
-          max-width: 500px;
-          width: 100%;
-        }
 
         video {
           @media @mobile {
@@ -327,6 +322,7 @@ section.text {
         justify-items: center;
         align-items: center;
         grid-gap: 8px;
+        max-width: 100%;
 
         img,
         video {
@@ -354,6 +350,12 @@ section.text {
       .knockout-upper();
 
       letter-spacing: 1px;
+    }
+
+    div {
+      @media @mobile {
+        margin: 10px auto 5px auto;
+      }
     }
   }
 }

@@ -12,7 +12,7 @@ var slides = $(".sequence .slide").reverse();
 var autoplayWrapper = $.one(".a11y-controls");
 
 // Initialize leaflet map
-var map = L.map("base-map", { zoomControl: false, fadeAnimation: false, markerZoomAnimation: false}).setView(
+var map = L.map("base-map", { zoomSnap: .5, zoomControl: false, fadeAnimation: false, markerZoomAnimation: false}).setView(
   [37.466623667154515, -122.06826378148338],
   13
 );
