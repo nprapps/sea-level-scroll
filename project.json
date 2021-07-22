@@ -15,9 +15,9 @@
   "scripts": {
     "src/js/main.js": "build/app.js"
   },
-  "title": "",
-  "description": "",
-  "url": "",
+  "title": "Tech Giants Are In the Path Of Rising Seas. Who Should Pay To Protect Them?",
+  "description": "Coastal cities need billions of dollars to build defenses against sea level rise. Tensions are rising over where that funding will come from: taxpayers or private companies with waterfront property?",
+  "url": "https://apps.npr.org/sea-level-rise-silicon-valley",
   "image": "assets/logo.png",
   "analytics": {
     "topicIDs": [],
