@@ -128,11 +128,6 @@ path {
     fill-opacity: 0.2;
   }
 
-  &.timeline {
-    opacity: 0;
-    animation-fill-mode: forwards;
-  }
-
   &.area {
     stroke: #eee;
     stroke-width: 2px;
@@ -280,6 +275,10 @@ path {
     opacity: 0.4;
     display: inline-block;
     font-size: 80%;
+
+    @media @mobile {
+      font-size: 65%;
+    }
 
     &::after {
       content: ' - ';
