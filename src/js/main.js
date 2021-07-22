@@ -108,10 +108,6 @@ document.body.classList.add("boot-complete");
 window.addEventListener("scroll", debounce(onScroll, 50));
 onScroll();
 
-player.autoplay.checked = true;
-var intro = $.one("#myVideo");
-player.play(intro);
-
 // link tracking
 var trackLink = function () {
   var action = this.dataset.track;
