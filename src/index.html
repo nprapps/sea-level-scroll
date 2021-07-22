@@ -29,9 +29,8 @@ var project = Object.assign({}, grunt.data.json.project, doc.social);
           print(t.include(`_${slide.type || "image"}.html`, { slide }));
         });
       %>
+      <%= t.include("partials/_footer.html", {doc, renderMarkdownText}) %>
     </main>
-
-    <%= t.include("partials/_footer.html", {doc, renderMarkdownText}) %>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="app.js" async></script>
     <%= t.include("partials/_analytics.html") %>
