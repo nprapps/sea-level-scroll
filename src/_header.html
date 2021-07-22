@@ -1,12 +1,13 @@
 <header class="splash image slide">
   <video
+    src="./assets/synced/videos/<%=doc.intro.video%>"
+    poster="./assets/synced/videos/<%= doc.intro.video %>.jpg"
+    class="backdrop"
+    id="myVideo"
     muted
     loop
-    autoplay
     playsinline
-    id="myVideo"
-    class="backdrop"
-    src="./assets/synced/videos/<%=doc.intro.video%>"
+    autoplay
   ></video>
   <div class="darken">
     <div class="chatter">
