@@ -139,10 +139,31 @@ header.splash {
     }
 
     &:checked + label::after {
+      // Because green looks a little weird here
       background: @gray-intermediate;
       content: "✔";
       color: @gray-dark;
       border-color: transparent;
     }
   }
+}
+
+.fixed {
+  position: fixed;
+  bottom: 30px;
+  right: 0;
+  z-index: 100;
+  padding: 5px 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  input[type="checkbox"] {
+    &:checked + label::after {
+      background: @bay-blue-medium;
+      color: @off-white;
+    }
+  }
+}
+
+.hidden {
+  visibility: hidden;
 }

@@ -9,6 +9,8 @@ require("./videos");
 
 var slides = $(".sequence .slide").reverse();
 
+var autoplayWrapper = $.one(".a11y-controls");
+
 // Initialize leaflet map
 var map = L.map("base-map", { zoomControl: false, fadeAnimation: false, markerZoomAnimation: false}).setView(
   [37.466623667154515, -122.06826378148338],
@@ -38,7 +40,7 @@ var handlers = {
 };
 
 var active;
-var activateSlide = function (slide) {
+var activateSlide = function (slide, slideNumber) {
   if (slide == active) return;
 
   // If we changed block type, let the previous director leave
@@ -66,6 +68,23 @@ var activateSlide = function (slide) {
       handler != neighborHandler && offset == 1
     );
   });
+
+  // Handle autoplay toggle display
+  var classes = autoplayWrapper.classList;
+  // On first slide (headline), don't fix, don't hide
+  if (slideNumber === 0) {
+    classes.remove("fixed");
+    classes.remove("hidden");
+    return;
+  }
+  // Fix after first slide
+  classes.add("fixed");
+  // Hide if not text or video
+  if (currType === "video" || currType === "text") {
+    classes.remove("hidden");
+  } else {
+    classes.add("hidden");
+  }
 };
 
 var onScroll = function () {
@@ -78,8 +97,9 @@ var onScroll = function () {
         completion = complete;
         track("completion", completion + "%");
       }
-      console.log(`slide ${slides.length - 1 - i}, id: ${slide.id}`);
-      return activateSlide(slide);
+      var slideNumber = slides.length - 1 - i;
+      console.log(`slide ${slideNumber}, id: ${slide.id}`);
+      return activateSlide(slide, slideNumber);
     }
   }
 };
