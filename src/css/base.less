@@ -97,10 +97,10 @@ footer {
     }
 
     ul {
-      border-top: 1px solid #333;
       color: #888;
       font-size: 0.8rem;
       padding-top: 11px;
+      text-align: center;
 
       li {
         display: inline-block;
@@ -114,5 +114,19 @@ footer {
         }
       }
     }
+  }
+}
+
+/*
+ * other mixins
+ */
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
   }
 }

@@ -2,32 +2,30 @@
   <div class="more-stories">
     <div class="constrained">
       <h3><%= renderMarkdownText(doc.footer.outboundTitle) %></h3>
-      <div class="chatter"><%= t.renderMarkdown(doc.footer.text) %></div>
-
-      <ul class="outbound">
-        <% doc.footer.outbound.forEach(function(link) { %>
-        <li>
-          <% if (link.embargo) { %>
-          <a>
-            <img
-              src="./assets/synced/thumbnails/<%= link.thumbnail %>"
-              alt=""
-            />
-            <span class="embargo"><%= link.embargo %></span>
-            <%= renderMarkdownText(link.title) %>
-          </a>
-          <% } else { %>
-          <a href="<%= link.url %>">
-            <img
-              src="<%= link.thumbnail %>"
-              alt=""
-            />
-            <%= renderMarkdownText(link.title) %>
-          </a>
-          <% } %>
-        </li>
-        <% }) %>
-      </ul>
+      <div>
+        <span><img src="./assets/synced/images/OEC-4.jpg" alt=""></span>
+        <span><ul class="outbound">
+          <% doc.footer.outbound.forEach(function(link) { %>
+          <li>
+            <% if (link.embargo) { %>
+            <a>
+              <img
+                src="./assets/synced/thumbnails/<%= link.thumbnail %>"
+                alt=""
+              />
+              <span class="embargo"><%= link.embargo %></span>
+              <%= renderMarkdownText(link.title) %>
+            </a>
+            <% } else { %>
+            <a href="<%= link.url %>">
+              <%= renderMarkdownText(link.title) %>
+            </a>
+            <% } %>
+          </li>
+          <% }) %>
+        </ul>
+        </span>
+      </div>
     </div>
   </div>
 
