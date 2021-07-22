@@ -11,24 +11,29 @@ var slides = $(".sequence .slide").reverse();
 var autoplayWrapper = $.one(".a11y-controls");
 
 // Initialize leaflet map
-var map = L.map("base-map", {  zoomSnap: .5, zoomControl: false, fadeAnimation: false, markerZoomAnimation: false}).setView(
-  [37.466623667154515, -122.06826378148338],
-  13
-);
+var map = L.map("base-map", {
+  zoomSnap: 0.5,
+  zoomControl: false,
+  fadeAnimation: false,
+  markerZoomAnimation: false,
+}).setView([37.466623667154515, -122.06826378148338], 13);
 
-map.createPane('images');
+map.createPane("images");
 
-var imageUrl = './assets/synced/images/background.png',
-    imageBounds = [[37.546638783179674, -121.86561652661184], [37.356600118161026, -122.24129532016448]];
+var imageUrl = "./assets/synced/images/background.png",
+  imageBounds = [
+    [37.546638783179674, -121.86561652661184],
+    [37.356600118161026, -122.24129532016448],
+  ];
 
-L.imageOverlay(imageUrl, imageBounds, {pane: 'tilePane'}).addTo(map);
+L.imageOverlay(imageUrl, imageBounds, { pane: "tilePane" }).addTo(map);
 L.tileLayer(
   "https://{s}.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     attribution: "",
     id: "baseLayer",
     subdomains: ["services", "server"],
-    
+
     attribution:
       "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
   }
@@ -74,6 +79,9 @@ var activateSlide = function (slide, slideNumber) {
       handler != neighborHandler && offset == 1
     );
   });
+
+  // Remove focus from autoplay checkbox
+  $.one("#autoplay-video").blur();
 
   // Handle autoplay toggle display
   var classes = autoplayWrapper.classList;
