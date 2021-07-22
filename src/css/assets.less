@@ -51,12 +51,10 @@
 // Style leaflet tiles to help layers pop.
 .leaflet-tile-container {
   filter: contrast(110%) brightness(0.65);
-  
 }
 
 body.close-up .leaflet-tile-container {
-
-  filter: none !important;  
+  filter: none !important;
 }
 
 // Asset path styles
@@ -68,34 +66,41 @@ path {
     &.flood-50,
     &.flood-100,
     &.flood-levee {
-      fill: url(#wave1);
       animation: 1.75s linear wave-effect infinite;
+      @-moz-document url-prefix() {
+        fill: url(#wave1);
+        animation: 2s linear partial-fade-in;
+      }
     }
 
     &.flood-100 {
       animation: 2s linear partial-fade-in, 1.75s linear wave-effect infinite;
+      @-moz-document url-prefix() {
+        fill: url(#wave1);
+        animation: 2s linear partial-fade-in;
+      }
     }
 
     &.flood-levee {
       animation: none;
     }
 
-    &.flood-transparent {
-      fill: none;
+    &.flood-50 {
       stroke-width: 2px;
       stroke: rgba(255, 255, 255, 0.15);
+      // filter: drop-shadow(0px 0px 4px #ddd);
     }
   }
 
   &.levee {
     stroke: @levee;
-    stroke-width:4px;
+    stroke-width: 4px;
     filter: drop-shadow(0px 0px 4px #fff);
 
     &.google {
       stroke-width: 2.5px;
       fill: @levee;
-      fill-opacity:1;
+      fill-opacity: 1;
     }
   }
 
@@ -139,9 +144,9 @@ path {
 
   &.fb21 {
     fill-opacity: 0.4;
-    fill:#333;
+    fill: #333;
     stroke: #fff;
-    stroke-width:2px;
+    stroke-width: 2px;
     filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   }
 
@@ -223,7 +228,7 @@ path {
     .knockout();
 
     font-size: 140px;
-    fill: darken(@google,10%);
+    fill: darken(@google, 10%);
     letter-spacing: 5px;
     text-shadow: none;
     stroke: #fff;
@@ -235,7 +240,7 @@ path {
 
   .facebook > svg > text.curve {
     font-size: 100px !important;
-    fill: darken(@facebook,10%);
+    fill: darken(@facebook, 10%);
   }
 
   .note {
@@ -281,12 +286,12 @@ path {
     }
 
     &::after {
-      content: ' - ';
+      content: " - ";
     }
 
-    &.year-2020::after{
-        content: '';
-      }
+    &.year-2020::after {
+      content: "";
+    }
   }
 }
 
