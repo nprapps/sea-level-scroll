@@ -270,7 +270,7 @@ path {
 
 .timeline {
   display: none;
-
+  color: @google;
   text-shadow: @textShadow;
 
   .year-2013 & {
@@ -303,7 +303,8 @@ path {
 .year-2018 .timeline div.year-2018,
 .year-2019 .timeline div.year-2019,
 .year-2020 .timeline div.year-2020 {
-  opacity: 1;
+  animation: 1s linear fade-in;
+  opacity: .8;
 }
 
 .year {
