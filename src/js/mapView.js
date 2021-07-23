@@ -1,5 +1,6 @@
 var $ = require("./lib/qsa");
 var View = require("./view");
+var debounce = require("./lib/debounce");
 
 var { isMobile } = require("./lib/breakpoints");
 var mapKey = require("../../data/map_keys.sheet.json");
@@ -16,6 +17,7 @@ module.exports = class MapView extends View {
   constructor(map) {
     super();
     this.map = map;
+    this.onMapScroll = debounce(onMapScroll, 50);
   }
 
   enter(slide) {
@@ -29,7 +31,7 @@ module.exports = class MapView extends View {
     var labels = getLayerVals(currLayer, "label_ids");
 
     classes = currLayer.map_class ? currLayer.map_class.split(', ').reverse() : [];
-    if (classes.length) window.addEventListener("scroll", onMapScroll);
+    if (classes.length) window.addEventListener("scroll", this.onMapScroll);
 
     // Remove old layers if layer isn't in new map
     var keepAssets = [];
@@ -66,7 +68,7 @@ module.exports = class MapView extends View {
   }
 
   exit(slide) {
-    window.removeEventListener("scroll", onMapScroll);
+    window.removeEventListener("scroll", this.onMapScroll);
     classes.forEach(c => document.body.classList.remove(c))
     super.exit(slide);
     mapElement.classList.add("exiting");
