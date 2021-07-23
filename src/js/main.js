@@ -20,7 +20,7 @@ var map = L.map("base-map", {
 
 map.createPane("images");
 
-var imageUrl = "./assets/synced/images/background.png",
+var imageUrl = "./assets/synced/images/background.jpg",
   imageBounds = [
     [37.546638783179674, -121.86561652661184],
     [37.356600118161026, -122.24129532016448],
