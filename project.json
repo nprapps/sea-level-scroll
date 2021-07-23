@@ -20,12 +20,12 @@
   "url": "https://apps.npr.org/sea-level-rise-silicon-valley",
   "image": "assets/logo.png",
   "analytics": {
-    "topicIDs": [],
-    "primaryTopic": "",
-    "secondaryTopics": []
+    "topicIDs": ["P1007","1001","1002"],
+    "primaryTopic": "Science",
+    "secondaryTopics": ["Science","News","Home Page Top Stories"]
   },
   "sheets": ["1rKMelWJuhZYGaEhAZLsrmkPkW8YJvmjRcThRsJJBfsI"],
   "docs": {"story" : "1FGfTmIpcesHqguBYmc2KnODwcVjbKx8etXqrA99bEnc"},
-  "embedded": true,
+  "embedded": false,
   "production": false
 }
