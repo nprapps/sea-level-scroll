@@ -206,9 +206,19 @@ hr {
     }
   }
 
-  .caption {
-    font-size: 80%;
+  span.caption {
+    width: 64%;
+  }
+
+  span.credit {
     font-style: italic;
+    width: 35%;
+    text-align: right;
+    color: #ccc;
+
+    @media @mobile {
+        text-align: left;
+      }
   }
 
   &.image,
@@ -343,8 +353,14 @@ section.text {
     }
 
     div > span {
-      text-align: right;
-      display: block;
+      display: inline-block; 
+      font-size: 75%;
+
+      @media @mobile {
+        display: block;
+        width: 100%;
+      }
+      
     }
 
     h2 {
