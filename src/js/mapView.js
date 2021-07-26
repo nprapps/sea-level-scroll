@@ -185,11 +185,9 @@ var loadAsset = function (value, id, opt_map) {
 var onMapScroll = function () {
   var content = $.one('.active.slide .content');
   var bounds = content.getBoundingClientRect();
-  var h = window.innerHeight - (window.innerHeight/3);
-  var factor = h / classes.length;
-  console.log(h)
-  var index = Math.floor((bounds.bottom - (window.innerHeight/3)) / factor);
-  console.log(index)
+  var start = classes.length > 1 ? bounds.bottom : bounds.top;
+  var factor = (window.innerHeight - (window.innerHeight/3))/classes.length;
+  var index = Math.floor((start - (window.innerHeight/3)) / factor);
 
   for (var i = classes.length - 1; i >= 0; i-- ) {
     document.body.classList.toggle(classes[i], i >= index)
