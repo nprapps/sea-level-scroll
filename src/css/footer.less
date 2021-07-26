@@ -28,7 +28,7 @@ footer.closing {
     padding: 100px 20px;
 
     .constrained {
-      padding: 10px 20px;
+      padding: 15px 20px;
       background: fade(black, 50%);
       border-radius: 4px;
       backdrop-filter: blur(8px);
@@ -44,11 +44,20 @@ footer.closing {
       }
     }
 
+    .credit {
+      font-style: italic;
+      color: #787878;
+      display: block;
+      margin-top: 3px;
+      font-size: 85%;
+    }
+
     h3 {
       .knockout-upper();
       color: @white;
-      font-size: 1.4rem;
-      margin: 0 0 11px 0;
+      font-size: 1.2rem;
+      margin: 0 0 15px 0;
+      line-height: 1.1;
     }
 
     hr {
@@ -80,12 +89,12 @@ footer.closing {
     .gotham();
     list-style-type: none;
     padding: 0;
-    margin: 0 0 11px 0;
+    margin: 11px 0 11px 0;
 
     @media @mobile-above {
       align-items: flex-start;
-      text-align: center;
       margin-bottom: 22px;
+      margin-top: 0;
     }
 
     li {
@@ -99,7 +108,7 @@ footer.closing {
       }
 
       @media @mobile-above {
-        margin: 0 12px;
+        margin: 0 0 0 22px;
       }
       padding: 10px 0;
     }
