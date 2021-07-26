@@ -122,6 +122,13 @@ document.body.classList.add("boot-complete");
 window.addEventListener("scroll", debounce(onScroll, 50));
 onScroll();
 
+// handle NPR One
+var here = new URL(window.location.href);
+var renderPlatform = here.searchParams.get("renderPlatform");
+if (renderPlatform && renderPlatform.match(/nprone/)) {
+  document.body.classList.add("nprone");
+}
+
 // link tracking
 var trackLink = function () {
   var action = this.dataset.track;

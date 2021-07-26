@@ -25,7 +25,8 @@ body {
   color: @off-white;
 }
 
-img, svg {
+img,
+svg {
   max-width: 100%;
 }
 
@@ -47,12 +48,14 @@ h2 {
   text-transform: uppercase;
 }
 
-
-a, a:visited {
+a,
+a:visited {
   color: @accent-dark;
 }
 
-a:hover, a:active, a:focus {
+a:hover,
+a:active,
+a:focus {
   color: @accent-light;
 }
 
@@ -86,12 +89,13 @@ footer {
   }
 
   .npr {
-
-    a, a:visited {
+    a,
+    a:visited {
       color: white;
       text-decoration: none;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         color: #888;
       }
     }
@@ -114,6 +118,17 @@ footer {
         }
       }
     }
+  }
+}
+
+.nprone {
+  .leaflet-bottom,
+  .slide > .watermark {
+    bottom: 100px;
+  }
+
+  .a11y-controls.fixed {
+    bottom: 125px;
   }
 }
 
