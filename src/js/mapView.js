@@ -64,6 +64,7 @@ module.exports = class MapView extends View {
 
     // Add new layers onto slide.
     addAssets(map, assets);
+    if (mapAssets['flood100']) mapAssets['flood100'].bringToFront();
     addMarkers(map, labels, bounds);
   }
 
@@ -95,7 +96,7 @@ var addMarkers = function (map, labels, bounds) {
     var label = labelKey[a];
     if (!label) return;
     var [lat, lon] = label.lat_long.split(",").map(b => Number(b));
-    if (isMobile && label.mobile_lat_long) {
+    if (isMobile.matches && label.mobile_lat_long) {
       if (label.mobile_lat_long == "hide") return;
       [lat, lon] = label.mobile_lat_long.split(",").map(a => a.trim());
     }
@@ -140,10 +141,10 @@ var addAssets = function (map, assets) {
 
 // Get lat/long bounds to zoom to.
 var getBounds = function (layer) {
-  var southWestBounds = isMobile
+  var southWestBounds = isMobile.matches
     ? layer.mobile_southWest.split(",")
     : layer.southWest.split(",");
-  var northEastBounds = isMobile
+  var northEastBounds = isMobile.matches
     ? layer.mobile_northEast.split(",")
     : layer.northEast.split(",");
 
@@ -183,8 +184,7 @@ var loadAsset = function (value, id, opt_map) {
 };
 
 var onMapScroll = function () {
-  var content = $.one('.active.slide .content');
-  var bounds = content.getBoundingClientRect();
+  var bounds = $.one('.active.slide .content').getBoundingClientRect();
   var start = classes.length > 1 ? bounds.bottom : bounds.top;
   var factor = (window.innerHeight - (window.innerHeight/3))/classes.length;
   var index = Math.floor((start - (window.innerHeight/3)) / factor);
