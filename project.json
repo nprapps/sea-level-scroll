@@ -15,10 +15,10 @@
   "scripts": {
     "src/js/main.js": "build/app.js"
   },
-  "title": "Tech Giants Are In the Path Of Rising Seas. Who Should Pay To Protect Them?",
+  "title": "Rising Seas Are Coming For Big Tech Campuses. Who Will Pay To Protect Them?",
   "description": "Coastal cities need billions of dollars to build defenses against sea level rise. Tensions are rising over where that funding will come from: taxpayers or private companies with waterfront property?",
-  "url": "https://apps.npr.org/sea-level-rise-silicon-valley",
-  "image": "assets/logo.png",
+  "url": "https://apps.npr.org/sea-level-rise-silicon-valley/",
+  "image": "assets/synced/images/EPA_image_selects_websize-6.jpg",
   "analytics": {
     "topicIDs": ["P1007","1001","1002"],
     "primaryTopic": "Science",
@@ -27,5 +27,5 @@
   "sheets": ["1rKMelWJuhZYGaEhAZLsrmkPkW8YJvmjRcThRsJJBfsI"],
   "docs": {"story" : "1FGfTmIpcesHqguBYmc2KnODwcVjbKx8etXqrA99bEnc"},
   "embedded": false,
-  "production": false
+  "production": true
 }

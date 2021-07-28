@@ -122,6 +122,16 @@ document.body.classList.add("boot-complete");
 window.addEventListener("scroll", debounce(onScroll, 50));
 onScroll();
 
+// fix viewport height units in Safari
+if (!!navigator.userAgent.match(/i(os|pad|phone)/i)) {
+  var setVH = function() {
+    var vh = window.innerHeight / 100;
+    document.body.style.setProperty("--vh", `${vh}px`);
+  };
+  window.addEventListener("resize", setVH);
+  setVH();
+}
+
 // handle NPR One
 var here = new URL(window.location.href);
 var renderPlatform = here.searchParams.get("renderPlatform");
