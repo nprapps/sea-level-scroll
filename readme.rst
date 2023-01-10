@@ -17,7 +17,7 @@ With those installed, you can then set the project up using your terminal:
 #. Pull the code - ``git clone git@github.com:nprapps/levee-interactive``
 #. Enter the project folder - ``cd levee-interactive``
 #. Install dependencies from NPM - ``npm install``
-#. Install assets / initial docs - ``grunt docs sync``
+#. Install assets / initial docs - ``grunt docs sheets sync``
 #. Start the server - ``grunt``
 
 Running tasks
