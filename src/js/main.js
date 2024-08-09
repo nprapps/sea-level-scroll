@@ -5,6 +5,7 @@ var mapView = require("./mapView");
 var imageView = require("./imageView");
 var textView = require("./textView");
 require("./videos");
+require("./analytics");
 
 var slides = $(".sequence .slide").reverse();
 
@@ -109,6 +110,7 @@ var onScroll = function () {
       var complete = (((slides.length - i) / slides.length) * 100) | 0;
       if (complete > completion) {
         completion = complete;
+        console.log(completion)
         track("completion", completion + "%");
       }
       var slideNumber = slides.length - 1 - i;
